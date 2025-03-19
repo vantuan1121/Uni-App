@@ -1,0 +1,160 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue",
+      "^uv-(.*)": "@climblee/uv-ui/components/uv-$1/uv-$1.vue",
+      "^(?!z-paging-refresh|z-paging-load-more)z-paging(.*)": "z-paging/components/z-paging$1/z-paging$1.vue"
+    }
+  },
+  "pages": [
+    {
+      "path": "pages/index/home/index",
+      "aliasPath": "/",
+      "style": {
+        "navigationBarTitleText": "Home"
+      },
+      "type": "home"
+    },
+    {
+      "path": "pages/index/search/index",
+      "aliasPath": "/search",
+      "style": {
+        "navigationBarTitleText": "Search"
+      },
+      "type": "search"
+    },
+    {
+      "path": "pages/index/example/index",
+      "aliasPath": "/example",
+      "style": {
+        "navigationBarTitleText": "Example"
+      }
+    },
+    {
+      "path": "pages/index/user/index",
+      "aliasPath": "/user",
+      "style": {
+        "navigationBarTitleText": "Mine"
+      }
+    },
+    {
+      "path": "pages/login/phone/index",
+      "aliasPath": "/login",
+      "style": {
+        "navigationStyle": "custom"
+      }
+    },
+    {
+      "path": "pages/errors/404/index",
+      "aliasPath": "/404",
+      "style": {
+        "navigationBarTitleText": "404"
+      }
+    }
+  ],
+  "subPackages": [
+    {
+      "root": "pages/webview",
+      "pages": [
+        {
+          "path": "index",
+          "aliasPath": "/webview",
+          "style": {
+            "navigationBarTitleText": "webview"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages/middleware",
+      "pages": [
+        {
+          "path": "index",
+          "aliasPath": "/middleware",
+          "meta": {
+            "middleware": [
+              "realname"
+            ]
+          },
+          "style": {
+            "navigationBarTitleText": "Routing middleware"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages/statement",
+      "pages": [
+        {
+          "path": "index",
+          "aliasPath": "/statement",
+          "style": {
+            "navigationBarTitleText": "Product Service Agreement"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages/realname",
+      "pages": [
+        {
+          "path": "index",
+          "aliasPath": "/realname",
+          "style": {
+            "navigationBarTitleText": "Real-name authentication"
+          }
+        }
+      ]
+    },
+    {
+      "root": "pages/contact",
+      "pages": [
+        {
+          "path": "index",
+          "aliasPath": "/contact",
+          "style": {
+            "navigationBarTitleText": "Contact Us"
+          }
+        }
+      ]
+    }
+  ],
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#018d71",
+    "backgroundColor": "#F8F8F8",
+    "list": [
+      {
+        "iconPath": "static/tabbar/home.png",
+        "selectedIconPath": "static/tabbar/home-active.png",
+        "pagePath": "pages/index/home/index",
+        "text": "Home"
+      },
+      {
+        "iconPath": "static/tabbar/search.png",
+        "selectedIconPath": "static/tabbar/search-active.png",
+        "pagePath": "pages/index/search/index",
+        "text": "Search"
+      },
+      {
+        "iconPath": "static/tabbar/example.png",
+        "selectedIconPath": "static/tabbar/example-active.png",
+        "pagePath": "pages/index/example/index",
+        "text": "Example"
+      },
+      {
+        "iconPath": "static/tabbar/user.png",
+        "selectedIconPath": "static/tabbar/user-active.png",
+        "pagePath": "pages/index/user/index",
+        "text": "Mine"
+      }
+    ]
+  },
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "vite-uniapp-template",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#f8f8f8"
+  }
+}
