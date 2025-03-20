@@ -21,8 +21,7 @@
       "aliasPath": "/search",
       "style": {
         "navigationBarTitleText": "Search"
-      },
-      "type": "search"
+      }
     },
     {
       "path": "pages/index/example/index",
@@ -45,6 +44,20 @@
         "navigationStyle": "custom"
       }
     },
+    {
+      "path": "pages/index/search/browse/browse-menu/Nature",
+      "aliasPath": "/Nature",
+      "style": {
+        "navigationStyle": "Nature"
+      }
+    },
+    {
+      "path": "pages/index/search/search-header/ImageSearch",
+      "aliasPath": "/ImageSearch",
+      "style": {
+        "navigationStyle": "ImageSearch"
+      }
+    },    
     {
       "path": "pages/errors/404/index",
       "aliasPath": "/404",

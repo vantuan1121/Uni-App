@@ -23,12 +23,16 @@ import Gradients from '@/assets/BrowseImages/Gradients.jpg'
     <div>
       <div class="flex gap-6 overflow-x-auto whitespace-nowrap scrollbar-hide p-2">
         <div class="flex flex-col space-y-4">
-          <div class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0">
+          <router-link
+            to="/pages/index/search/browse/browse-menu/Nature"
+            class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
+          >
             <img :src="Nature" alt="Nature" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
               <span class="text-white text-xl font-bold">Nature</span>
             </div>
-          </div>
+          </router-link>
+
           <!--  -->
           <div class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0">
             <img :src="Textures" alt="Textures" class="w-full h-full object-cover" />

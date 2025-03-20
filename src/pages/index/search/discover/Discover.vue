@@ -1,4 +1,5 @@
 <script setup>
+import ShowPhoto from '@/pages/index/search/ShowPhoto.vue'
 </script>
 
 <template>
@@ -6,5 +7,8 @@
     <h1 class="font-bold">
       Discover
     </h1>
+  </div>
+  <div>
+    <ShowPhoto></ShowPhoto>
   </div>
 </template>
