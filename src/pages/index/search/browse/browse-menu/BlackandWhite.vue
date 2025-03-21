@@ -4,7 +4,7 @@ import { searchUnsplashImages } from '@/api/unsplash/unsplashAPI'
 
 const leftColumn = ref([])
 const rightColumn = ref([])
-const query = 'Nature'
+const query = 'Black and White'
 const perPage = 20
 
 async function fetchImages() {
@@ -21,12 +21,12 @@ onMounted(fetchImages)
 <template>
   <div class="grid grid-cols-2 gap-1">
     <!-- Cột trái -->
-    <div class="flex flex-col gap-1">
+    <div class="flex flex-col gap-4">
       <div v-for="(image, index) in leftColumn" :key="index" class="relative">
         <a :href="image.links.html" target="_blank">
           <img
             :src="image.urls.small" :alt="image.alt_description"
-            class="shadow-md w-full object-cover"
+            class=" shadow-md w-full object-cover"
           />
         </a>
         <!-- tên tác giả -->
@@ -44,7 +44,7 @@ onMounted(fetchImages)
         <a :href="image.links.html" target="_blank">
           <img
             :src="image.urls.small" :alt="image.alt_description"
-            class=" shadow-md w-full object-cover"
+            class="1 shadow-md w-full object-cover"
           />
         </a>
         <!-- tên tác giả -->

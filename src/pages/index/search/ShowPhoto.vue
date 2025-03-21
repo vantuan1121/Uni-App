@@ -1,7 +1,7 @@
 <template>
-  <view class="flex gap-4 p-4">
+  <view class="flex gap-1  ">
     <!-- Cột 1 -->
-    <view class="flex-1 flex flex-col gap-4">
+    <view class="flex-1 flex flex-col ">
       <view
         v-for="image in column1"
         :key="image.id"
@@ -10,17 +10,17 @@
       >
         <image
           :src="image.urls.small"
-          class="w-full rounded-lg shadow-md"
+          class="w-full"
           mode="widthFix"
         />
-        <view class="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white p-1 rounded">
+        <view class="absolute bottom-2 left-2 text-white p-1 rounded">
           {{ image.user.name }}
         </view>
       </view>
     </view>
 
     <!-- Cột 2 -->
-    <view class="flex-1 flex flex-col gap-4">
+    <view class="flex-1 flex flex-col">
       <view
         v-for="image in column2"
         :key="image.id"
@@ -29,10 +29,10 @@
       >
         <image
           :src="image.urls.small"
-          class="w-full rounded-lg shadow-md"
+          class="w-full"
           mode="widthFix"
         />
-        <view class="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white p-1 rounded">
+        <view class="absolute bottom-2 left-2 text-white p-1 rounded">
           {{ image.user.name }}
         </view>
       </view>

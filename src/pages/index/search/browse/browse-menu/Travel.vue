@@ -4,7 +4,7 @@ import { searchUnsplashImages } from '@/api/unsplash/unsplashAPI'
 
 const leftColumn = ref([])
 const rightColumn = ref([])
-const query = 'Nature'
+const query = 'Travel'
 const perPage = 20
 
 async function fetchImages() {
@@ -26,7 +26,7 @@ onMounted(fetchImages)
         <a :href="image.links.html" target="_blank">
           <img
             :src="image.urls.small" :alt="image.alt_description"
-            class="shadow-md w-full object-cover"
+            class=" shadow-md w-full object-cover"
           />
         </a>
         <!-- tên tác giả -->
