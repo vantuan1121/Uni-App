@@ -18,7 +18,7 @@ import ShowPhoto from '@/pages/index/search/ShowPhoto.vue'
       Discover
     </h1>
   </div>
-  <div>
+  <div class="mt-[10px]">
     <ShowPhoto></ShowPhoto>
   </div>
 </template>

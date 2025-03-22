@@ -20,7 +20,7 @@ import Gradients from '@/assets/BrowseImages/Gradients.jpg'
     <h1 class="font-bold text-[30px]">
       Browse by Category
     </h1>
-    <div>
+    <div class="mt-[10px]">
       <div class="flex gap-2 overflow-x-auto whitespace-nowrap scrollbar-hide">
         <div class="flex flex-col space-y-2">
           <router-link

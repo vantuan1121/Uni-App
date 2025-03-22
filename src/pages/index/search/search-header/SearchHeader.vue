@@ -131,7 +131,7 @@ function handleClickOutside(event) {
         <h3 class="text-sm font-semibold text-gray-600 mb-2">
           Recent
         </h3>
-        <span class="text-sm text-gray-500 cursor-pointer" @click="clearHistory">
+        <span class="text-sm text-gray-500 cursor-pointer" @click.stop="clearHistory">
           Clear
         </span>
       </div>
