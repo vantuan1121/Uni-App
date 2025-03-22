@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import search from '@/static/tabbar/search.png'
 
 const props = defineProps({
@@ -48,9 +48,14 @@ function clearHistory() {
 }
 
 // Xóa ô tìm kiếm
+
 function clearSearch() {
-  searchQuery.value = ''
-  emit('update:modelValue', '')
+  searchQuery.value = '' // Xóa nội dung ô tìm kiếm nhưng không ảnh hưởng đến trạng thái tìm kiếm
+  isSearching.value = true // Giữ giao diện tìm kiếm hiển thị
+
+  nextTick(() => {
+    document.querySelector('input').focus() // Giữ lại focus cho input
+  })
 }
 
 // Điều hướng đến trang tìm kiếm
@@ -106,7 +111,7 @@ function handleClickOutside(event) {
         <span
           v-if="searchQuery"
           class="absolute right-3 cursor-pointer text-gray-500"
-          @click="clearSearch"
+          @click.stop="clearSearch"
         >
           ☒
         </span>
