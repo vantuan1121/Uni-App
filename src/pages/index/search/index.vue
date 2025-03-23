@@ -5,7 +5,7 @@ import ShowPhoto from '@/pages/index/search/ShowPhoto.vue'
 </script>
 
 <template>
-  <div class="fixed top-9 left-0 w-full bg-white  z-50 p-2">
+  <div class="fixed left-0 w-full bg-white z-50 p-2">
     <SearchHeader></SearchHeader>
   </div>
 
@@ -14,7 +14,7 @@ import ShowPhoto from '@/pages/index/search/ShowPhoto.vue'
   </div>
 
   <div>
-    <h1 class="font-bold text-[30px] mt-[30px] ml-[30px]">
+    <h1 class="font-bold text-[26px] mt-[30px] ml-[30px]">
       Discover
     </h1>
   </div>

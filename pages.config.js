@@ -23,7 +23,7 @@ export default defineUniPages({
       path: 'pages/index/search/search-header/ImageSearch',
       aliasPath: '/ImageSearch',
       style: {
-        navigationBarTitleText: 'ImageSearch',
+        navigationBarTitleText: 'Search',
       },
     },
     {
@@ -216,23 +216,10 @@ export default defineUniPages({
     selectedColor: '#018d71',
     backgroundColor: '#F8F8F8',
     list: [
-      {
-        iconPath: 'static/tabbar/home.png',
-        selectedIconPath: 'static/tabbar/home-active.png',
-        pagePath: 'pages/index/home/index',
-        text: 'Home',
-      },
-      {
-        iconPath: 'static/tabbar/user.png',
-        selectedIconPath: 'static/tabbar/user-active.png',
-        pagePath: 'pages/index/user/index',
-        text: 'Mine',
-      },
     ],
   },
   globalStyle: {
     navigationBarTextStyle: 'black',
-    navigationBarTitleText: 'vite-uniapp-template',
     navigationBarBackgroundColor: '#ffffff',
     backgroundColor: '#f8f8f8',
   },

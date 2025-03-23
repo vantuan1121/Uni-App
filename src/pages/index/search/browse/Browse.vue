@@ -20,7 +20,7 @@ const btnClass = 'flex flex-col space-y-2'
 
 <template>
   <div>
-    <h1 class="font-bold text-[30px]">
+    <h1 class="font-bold text-[26px]">
       Browse by Category
     </h1>
     <div class="mt-[10px]">
@@ -28,7 +28,7 @@ const btnClass = 'flex flex-col space-y-2'
         <div :class="btnClass">
           <router-link
             to="/pages/index/search/browse/browse-menu/Nature"
-            class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
+            class="relative w-35 h-35 rounded-lg overflow-hidden bg-black shrink-0"
           >
             <img :src="Nature" alt="Nature" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
@@ -39,7 +39,7 @@ const btnClass = 'flex flex-col space-y-2'
           <!--  -->
           <router-link
             to="/pages/index/search/browse/browse-menu/Textures"
-            class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
+            class="relative w-35 h-35 rounded-lg overflow-hidden bg-black shrink-0"
           >
             <img :src="Textures" alt="Textures" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
@@ -52,7 +52,7 @@ const btnClass = 'flex flex-col space-y-2'
         <div :class="btnClass">
           <router-link
             to="/pages/index/search/browse/browse-menu/BlackandWhite"
-            class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
+            class="relative w-35 h-35 rounded-lg overflow-hidden bg-black shrink-0"
           >
             <img :src="BlackandWhite" alt="Black-and-White" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
@@ -62,7 +62,7 @@ const btnClass = 'flex flex-col space-y-2'
           <!--  -->
           <router-link
             to="/pages/index/search/browse/browse-menu/Abstract"
-            class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
+            class="relative w-35 h-35 rounded-lg overflow-hidden bg-black shrink-0"
           >
             <img :src="Abstract" alt="Abstract" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
@@ -75,7 +75,7 @@ const btnClass = 'flex flex-col space-y-2'
         <div :class="btnClass">
           <router-link
             to="/pages/index/search/browse/browse-menu/Space"
-            class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
+            class="relative w-35 h-35 rounded-lg overflow-hidden bg-black shrink-0"
           >
             <img :src="Space" alt="Space" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
@@ -85,7 +85,7 @@ const btnClass = 'flex flex-col space-y-2'
           <!--  -->
           <router-link
             to="/pages/index/search/browse/browse-menu/Minimal"
-            class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
+            class="relative w-35 h-35 rounded-lg overflow-hidden bg-black shrink-0"
           >
             <img :src="Minimal" alt="Minimal" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
@@ -98,7 +98,7 @@ const btnClass = 'flex flex-col space-y-2'
         <div :class="btnClass">
           <router-link
             to="/pages/index/search/browse/browse-menu/Animals"
-            class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
+            class="relative w-35 h-35 rounded-lg overflow-hidden bg-black shrink-0"
           >
             <img :src="Animals" alt="Animals" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
@@ -108,7 +108,7 @@ const btnClass = 'flex flex-col space-y-2'
           <!--  -->
           <router-link
             to="/pages/index/search/browse/browse-menu/Sky"
-            class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
+            class="relative w-35 h-35 rounded-lg overflow-hidden bg-black shrink-0"
           >
             <img :src="Sky" alt="Sky" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
@@ -121,7 +121,7 @@ const btnClass = 'flex flex-col space-y-2'
         <div :class="btnClass">
           <router-link
             to="/pages/index/search/browse/browse-menu/Flowers"
-            class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
+            class="relative w-35 h-35 rounded-lg overflow-hidden bg-black shrink-0"
           >
             <img :src="Flowers" alt="Flowers" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
@@ -131,7 +131,7 @@ const btnClass = 'flex flex-col space-y-2'
           <!--  -->
           <router-link
             to="/pages/index/search/browse/browse-menu/Travel"
-            class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
+            class="relative w-35 h-35 rounded-lg overflow-hidden bg-black shrink-0"
           >
             <img :src="Travel" alt="Travel" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
@@ -144,7 +144,7 @@ const btnClass = 'flex flex-col space-y-2'
         <div :class="btnClass">
           <router-link
             to="/pages/index/search/browse/browse-menu/Underwater"
-            class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
+            class="relative w-35 h-35 rounded-lg overflow-hidden bg-black shrink-0"
           >
             <img :src="Underwater" alt="Underwater" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
@@ -154,7 +154,7 @@ const btnClass = 'flex flex-col space-y-2'
           <!--  -->
           <router-link
             to="/pages/index/search/browse/browse-menu/Drones"
-            class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
+            class="relative w-35 h-35 rounded-lg overflow-hidden bg-black shrink-0"
           >
             <img :src="Drones" alt="Drones" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
@@ -167,7 +167,7 @@ const btnClass = 'flex flex-col space-y-2'
         <div :class="btnClass">
           <router-link
             to="/pages/index/search/browse/browse-menu/Architecture"
-            class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
+            class="relative w-35 h-35 rounded-lg overflow-hidden bg-black shrink-0"
           >
             <img :src="Architecture" alt="Architecture" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
@@ -177,7 +177,7 @@ const btnClass = 'flex flex-col space-y-2'
           <!--  -->
           <router-link
             to="/pages/index/search/browse/browse-menu/Gradients"
-            class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
+            class="relative w-35 h-35 rounded-lg overflow-hidden bg-black shrink-0"
           >
             <img :src="Gradients" alt="Gradients" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">

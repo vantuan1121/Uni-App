@@ -58,7 +58,7 @@ watch(searchQuery, () => {
     <!-- Thanh tìm kiếm luôn cố định trên cùng -->
     <SearchHeader v-model="searchQuery" />
 
-    <div class="flex-1 overflow-auto p-4 mt-[50px]">
+    <div class="flex-1 overflow-auto -mt-[30px]">
       <div v-if="isLoading" class="text-center text-gray-500">
         <span class="animate-pulse">Đang tải...</span>
       </div>
@@ -69,10 +69,10 @@ watch(searchQuery, () => {
         Không tìm thấy kết quả nào.
       </div>
 
-      <div v-else class="grid grid-cols-2 gap-4">
+      <div v-else class="grid grid-cols-2 gap-1">
         <!-- Cột 1: Ảnh chẵn -->
-        <div class="flex flex-col gap-4">
-          <div v-for="image in leftColumn" :key="image.id" class="relative rounded-lg overflow-hidden shadow-md">
+        <div class="flex flex-col gap-1">
+          <div v-for="image in leftColumn" :key="image.id" class="relative overflow-hidden shadow-md">
             <a :href="image.links.html" target="_blank">
               <img
                 :src="image.urls.small"
@@ -88,8 +88,8 @@ watch(searchQuery, () => {
         </div>
 
         <!-- Cột 2: Ảnh lẻ -->
-        <div class="flex flex-col gap-4">
-          <div v-for="image in rightColumn" :key="image.id" class="relative rounded-lg overflow-hidden shadow-md">
+        <div class="flex flex-col gap-1">
+          <div v-for="image in rightColumn" :key="image.id" class="relative  overflow-hidden shadow-md">
             <a :href="image.links.html" target="_blank">
               <img
                 :src="image.urls.small"
