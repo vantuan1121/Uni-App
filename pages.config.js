@@ -20,13 +20,6 @@ export default defineUniPages({
       },
     },
     {
-      path: 'pages/index/search/index',
-      aliasPath: '/search',
-      style: {
-        navigationBarTitleText: 'Search',
-      },
-    },
-    {
       path: 'pages/index/search/search-header/ImageSearch',
       aliasPath: '/ImageSearch',
       style: {
@@ -132,13 +125,6 @@ export default defineUniPages({
       },
     },
     {
-      path: 'pages/index/example/index',
-      aliasPath: '/example',
-      style: {
-        navigationBarTitleText: 'Example',
-      },
-    },
-    {
       path: 'pages/index/user/index',
       aliasPath: '/user',
       style: {
@@ -235,18 +221,6 @@ export default defineUniPages({
         selectedIconPath: 'static/tabbar/home-active.png',
         pagePath: 'pages/index/home/index',
         text: 'Home',
-      },
-      {
-        iconPath: 'static/tabbar/search.png',
-        selectedIconPath: 'static/tabbar/search-active.png',
-        pagePath: 'pages/index/search/index',
-        text: 'search',
-      },
-      {
-        iconPath: 'static/tabbar/example.png',
-        selectedIconPath: 'static/tabbar/example-active.png',
-        pagePath: 'pages/index/example/index',
-        text: 'Example',
       },
       {
         iconPath: 'static/tabbar/user.png',

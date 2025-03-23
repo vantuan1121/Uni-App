@@ -60,7 +60,7 @@ function clearSearch() {
 
 // Điều hướng đến trang tìm kiếm
 function handleCancel() {
-  uni.reLaunch({ url: '/pages/index/search/index' })
+  uni.reLaunch({ url: '/' })
 }
 
 // Xử lý tìm kiếm khi nhấn Enter
@@ -131,7 +131,7 @@ function handleClickOutside(event) {
         <h3 class="text-sm font-semibold text-gray-600 mb-2">
           Recent
         </h3>
-        <span class="text-sm text-gray-500 cursor-pointer" @click.stop="clearHistory">
+        <span class="text-sm text-gray-500 cursor-pointer translate-x-[-20px] translate-y-[-5px]" @click.stop="clearHistory">
           Clear
         </span>
       </div>

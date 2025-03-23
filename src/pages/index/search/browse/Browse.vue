@@ -13,6 +13,9 @@ import Underwater from '@/assets/BrowseImages/Underwater.jpg'
 import Drones from '@/assets/BrowseImages/Drones.jpg'
 import Architecture from '@/assets/BrowseImages/Architecture.jpg'
 import Gradients from '@/assets/BrowseImages/Gradients.jpg'
+
+// Style CSS
+const btnClass = 'flex flex-col space-y-2'
 </script>
 
 <template>
@@ -22,7 +25,7 @@ import Gradients from '@/assets/BrowseImages/Gradients.jpg'
     </h1>
     <div class="mt-[10px]">
       <div class="flex gap-2 overflow-x-auto whitespace-nowrap scrollbar-hide">
-        <div class="flex flex-col space-y-2">
+        <div :class="btnClass">
           <router-link
             to="/pages/index/search/browse/browse-menu/Nature"
             class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
@@ -46,7 +49,7 @@ import Gradients from '@/assets/BrowseImages/Gradients.jpg'
         </div>
 
         <!-- ======= -->
-        <div class="flex flex-col space-y-2">
+        <div :class="btnClass">
           <router-link
             to="/pages/index/search/browse/browse-menu/BlackandWhite"
             class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
@@ -69,7 +72,7 @@ import Gradients from '@/assets/BrowseImages/Gradients.jpg'
         </div>
 
         <!-- ======= -->
-        <div class="flex flex-col space-y-2">
+        <div :class="btnClass">
           <router-link
             to="/pages/index/search/browse/browse-menu/Space"
             class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
@@ -92,7 +95,7 @@ import Gradients from '@/assets/BrowseImages/Gradients.jpg'
         </div>
 
         <!-- ======= -->
-        <div class="flex flex-col space-y-2">
+        <div :class="btnClass">
           <router-link
             to="/pages/index/search/browse/browse-menu/Animals"
             class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
@@ -115,7 +118,7 @@ import Gradients from '@/assets/BrowseImages/Gradients.jpg'
         </div>
 
         <!-- ======= -->
-        <div class="flex flex-col space-y-2">
+        <div :class="btnClass">
           <router-link
             to="/pages/index/search/browse/browse-menu/Flowers"
             class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
@@ -138,7 +141,7 @@ import Gradients from '@/assets/BrowseImages/Gradients.jpg'
         </div>
 
         <!-- ======= -->
-        <div class="flex flex-col space-y-2">
+        <div :class="btnClass">
           <router-link
             to="/pages/index/search/browse/browse-menu/Underwater"
             class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
@@ -161,7 +164,7 @@ import Gradients from '@/assets/BrowseImages/Gradients.jpg'
         </div>
 
         <!-- ======= -->
-        <div class="flex flex-col space-y-2">
+        <div :class="btnClass">
           <router-link
             to="/pages/index/search/browse/browse-menu/Architecture"
             class="relative w-40 h-40 rounded-lg overflow-hidden bg-black shrink-0"
@@ -181,6 +184,10 @@ import Gradients from '@/assets/BrowseImages/Gradients.jpg'
               <span class="text-white text-xl font-bold">Gradients</span>
             </div>
           </router-link>
+        </div>
+
+        <!-- Khoảng trắng right -->
+        <div class="border-[15px] opacity-0">
         </div>
       </div>
       <!--  -->
