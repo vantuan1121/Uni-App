@@ -1,4 +1,4 @@
-const ACCESS_KEY = 'yQ6-aeStBbhtpc4WY4Dk6toVmyKQ6GcpiSqyNLLqkXM'
+const ACCESS_KEY = 'G8jz0wdZTEYKFLULho7RzugtdZJUriLzDOSPEUfJwmw'
 
 // Hàm gọi API chung
 async function unsplashRequest(endpoint, params = {}) {
