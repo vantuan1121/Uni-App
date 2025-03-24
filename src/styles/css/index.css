@@ -1,2 +1,15 @@
 @import "./applet.css";
 @import "./overrides.css";
+
+.uni-page-head {
+    position: static !important;
+  }
+  
+  *, ::before, ::after {
+    border-style: none !important;
+  }
+  
+  .uni-placeholder {
+    display: none !important;
+  }
+  

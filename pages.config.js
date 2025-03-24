@@ -15,121 +15,70 @@ export default defineUniPages({
     {
       path: 'pages/index/home/index',
       aliasPath: '/',
-      style: {
-        navigationBarTitleText: 'Home',
-      },
     },
     {
       path: 'pages/index/search/search-header/ImageSearch',
       aliasPath: '/ImageSearch',
-      style: {
-        navigationBarTitleText: 'Search',
-      },
     },
     {
       path: 'pages/index/search/browse/browse-menu/Nature',
       aliasPath: '/Nature',
-      style: {
-        navigationBarTitleText: 'Nature',
-      },
     },
     {
       path: 'pages/index/search/browse/browse-menu/Textures',
       aliasPath: '/Textures',
-      style: {
-        navigationBarTitleText: 'Textures',
-      },
     },
     {
       path: 'pages/index/search/browse/browse-menu/BlackandWhite',
       aliasPath: '/BlackandWhite',
-      style: {
-        navigationBarTitleText: 'Black and White',
-      },
     },
     {
       path: 'pages/index/search/browse/browse-menu/Abstract',
       aliasPath: '/Abstract',
-      style: {
-        navigationBarTitleText: 'Abstract',
-      },
     },
     {
       path: 'pages/index/search/browse/browse-menu/Space',
       aliasPath: '/Space',
-      style: {
-        navigationBarTitleText: 'Space',
-      },
     },
     {
       path: 'pages/index/search/browse/browse-menu/Minimal',
       aliasPath: '/Minimal',
-      style: {
-        navigationBarTitleText: 'Minimal',
-      },
     },
     {
       path: 'pages/index/search/browse/browse-menu/Animals',
       aliasPath: '/Animals',
-      style: {
-        navigationBarTitleText: 'Animals',
-      },
     },
     {
       path: 'pages/index/search/browse/browse-menu/Sky',
       aliasPath: '/Sky',
-      style: {
-        navigationBarTitleText: 'Sky',
-      },
     },
     {
       path: 'pages/index/search/browse/browse-menu/Flowers',
       aliasPath: '/Flowers',
-      style: {
-        navigationBarTitleText: 'Flowers',
-      },
     },
     {
       path: 'pages/index/search/browse/browse-menu/Travel',
       aliasPath: '/Travel',
-      style: {
-        navigationBarTitleText: 'Travel',
-      },
     },
     {
       path: 'pages/index/search/browse/browse-menu/Underwater',
       aliasPath: '/Underwater',
-      style: {
-        navigationBarTitleText: 'Underwater',
-      },
     },
     {
       path: 'pages/index/search/browse/browse-menu/Drones',
       aliasPath: '/Drones',
-      style: {
-        navigationBarTitleText: 'Drones',
-      },
     },
     {
       path: 'pages/index/search/browse/browse-menu/Architecture',
       aliasPath: '/Architecture',
-      style: {
-        navigationBarTitleText: 'Architecture',
-      },
     },
     {
       path: 'pages/index/search/browse/browse-menu/Gradients',
       aliasPath: '/Gradients',
-      style: {
-        navigationBarTitleText: 'Gradients',
-      },
     },
     {
       path: 'pages/index/user/index',
       aliasPath: '/user',
-      style: {
-        navigationBarTitleText: 'Mine',
-      },
     },
     {
       path: 'pages/login/phone/index',

@@ -84,7 +84,7 @@ function handleClickOutside(event) {
 
 <template>
   <div ref="searchBox" class="flex flex-col w-full gap-3">
-    <div class="flex items-center w-full gap-3 fixed top-9 left-0 right-0 bg-white p-3 z-50">
+    <div class="flex items-center w-full gap-3 fixed top-0 left-0 right-0 bg-white p-3 z-50">
       <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-200 flex-grow relative">
         <img :src="search" alt="search" class="w-5 h-5" />
         <input

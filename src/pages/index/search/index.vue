@@ -5,12 +5,17 @@ import ShowPhoto from '@/pages/index/search/ShowPhoto.vue'
 </script>
 
 <template>
-  <div class="fixed left-0 w-full bg-white z-50 p-2">
+  <div class="">
     <SearchHeader></SearchHeader>
   </div>
 
-  <div class="mt-[70px] ml-[30px]">
-    <Browse></Browse>
+  <div class="mt-[30px]">
+    <h1 class="font-bold text-[26px] ml-[30px]">
+      Browse by Category
+    </h1>
+    <div>
+      <Browse></Browse>
+    </div>
   </div>
 
   <div>

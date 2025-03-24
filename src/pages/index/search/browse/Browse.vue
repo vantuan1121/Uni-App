@@ -20,11 +20,12 @@ const btnClass = 'flex flex-col space-y-2'
 
 <template>
   <div>
-    <h1 class="font-bold text-[26px]">
-      Browse by Category
-    </h1>
-    <div class="mt-[10px]">
-      <div class="flex gap-2 overflow-x-auto whitespace-nowrap scrollbar-hide">
+    <div class="mt-[10px] relative">
+      <!-- Thêm padding bên trái chỉ cho phần chưa cuộn -->
+      <div class="absolute left-0 top-0 w-[40px] h-full bg-transparent pointer-events-none"></div>
+
+      <!-- Container cuộn với padding-left mà không có margin âm -->
+      <div class="flex gap-2 overflow-x-auto whitespace-nowrap scrollbar-hide px-[30px]">
         <div :class="btnClass">
           <router-link
             to="/pages/index/search/browse/browse-menu/Nature"
@@ -55,10 +56,12 @@ const btnClass = 'flex flex-col space-y-2'
             class="relative w-35 h-35 rounded-lg overflow-hidden bg-black shrink-0"
           >
             <img :src="BlackandWhite" alt="Black-and-White" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <span class="text-white text-[20px] font-bold">Black and White</span>
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center">
+              <span class="text-white text-[20px] font-bold">Black and</span>
+              <span class="text-white text-[20px] font-bold">White</span>
             </div>
           </router-link>
+
           <!--  -->
           <router-link
             to="/pages/index/search/browse/browse-menu/Abstract"

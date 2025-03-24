@@ -11,122 +11,88 @@
     {
       "path": "pages/index/home/index",
       "aliasPath": "/",
-      "style": {
-        "navigationBarTitleText": "Home"
-      },
+      "style": {},
       "type": "home"
     },
     {
       "path": "pages/index/search/search-header/ImageSearch",
       "aliasPath": "/ImageSearch",
-      "style": {
-        "navigationBarTitleText": "Search"
-      }
+      "style": {}
     },
     {
       "path": "pages/index/search/browse/browse-menu/Nature",
       "aliasPath": "/Nature",
-      "style": {
-        "navigationBarTitleText": "Nature"
-      }
+      "style": {}
     },
     {
       "path": "pages/index/search/browse/browse-menu/Textures",
       "aliasPath": "/Textures",
-      "style": {
-        "navigationBarTitleText": "Textures"
-      }
+      "style": {}
     },
     {
       "path": "pages/index/search/browse/browse-menu/BlackandWhite",
       "aliasPath": "/BlackandWhite",
-      "style": {
-        "navigationBarTitleText": "Black and White"
-      }
+      "style": {}
     },
     {
       "path": "pages/index/search/browse/browse-menu/Abstract",
       "aliasPath": "/Abstract",
-      "style": {
-        "navigationBarTitleText": "Abstract"
-      }
+      "style": {}
     },
     {
       "path": "pages/index/search/browse/browse-menu/Space",
       "aliasPath": "/Space",
-      "style": {
-        "navigationBarTitleText": "Space"
-      }
+      "style": {}
     },
     {
       "path": "pages/index/search/browse/browse-menu/Minimal",
       "aliasPath": "/Minimal",
-      "style": {
-        "navigationBarTitleText": "Minimal"
-      }
+      "style": {}
     },
     {
       "path": "pages/index/search/browse/browse-menu/Animals",
       "aliasPath": "/Animals",
-      "style": {
-        "navigationBarTitleText": "Animals"
-      }
+      "style": {}
     },
     {
       "path": "pages/index/search/browse/browse-menu/Sky",
       "aliasPath": "/Sky",
-      "style": {
-        "navigationBarTitleText": "Sky"
-      }
+      "style": {}
     },
     {
       "path": "pages/index/search/browse/browse-menu/Flowers",
       "aliasPath": "/Flowers",
-      "style": {
-        "navigationBarTitleText": "Flowers"
-      }
+      "style": {}
     },
     {
       "path": "pages/index/search/browse/browse-menu/Travel",
       "aliasPath": "/Travel",
-      "style": {
-        "navigationBarTitleText": "Travel"
-      }
+      "style": {}
     },
     {
       "path": "pages/index/search/browse/browse-menu/Underwater",
       "aliasPath": "/Underwater",
-      "style": {
-        "navigationBarTitleText": "Underwater"
-      }
+      "style": {}
     },
     {
       "path": "pages/index/search/browse/browse-menu/Drones",
       "aliasPath": "/Drones",
-      "style": {
-        "navigationBarTitleText": "Drones"
-      }
+      "style": {}
     },
     {
       "path": "pages/index/search/browse/browse-menu/Architecture",
       "aliasPath": "/Architecture",
-      "style": {
-        "navigationBarTitleText": "Architecture"
-      }
+      "style": {}
     },
     {
       "path": "pages/index/search/browse/browse-menu/Gradients",
       "aliasPath": "/Gradients",
-      "style": {
-        "navigationBarTitleText": "Gradients"
-      }
+      "style": {}
     },
     {
       "path": "pages/index/user/index",
       "aliasPath": "/user",
-      "style": {
-        "navigationBarTitleText": "Mine"
-      }
+      "style": {}
     },
     {
       "path": "pages/login/phone/index",

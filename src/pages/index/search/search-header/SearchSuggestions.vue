@@ -12,7 +12,7 @@ const emit = defineEmits(['selectSearch', 'clearHistory'])
 <template>
   <div
     v-if="searchHistory.length || trendingSearches.length"
-    class="fixed inset-0 bg-white z-40 overflow-auto max-h-screen px-4 pt-[100px]"
+    class="fixed inset-0 bg-white z-40 overflow-auto max-h-screen px-4 pt-[50px]"
   >
     <!-- Lịch sử tìm kiếm -->
     <div class="h-20px"></div>
