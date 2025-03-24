@@ -32,7 +32,7 @@ const btnClass = 'flex flex-col space-y-2'
           >
             <img :src="Nature" alt="Nature" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <span class="text-white text-xl font-bold">Nature</span>
+              <span class="text-white text-[20px] font-bold">Nature</span>
             </div>
           </router-link>
 
@@ -43,7 +43,7 @@ const btnClass = 'flex flex-col space-y-2'
           >
             <img :src="Textures" alt="Textures" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <span class="text-white text-xl font-bold">Textures</span>
+              <span class="text-white text-[20px] font-bold">Textures</span>
             </div>
           </router-link>
         </div>
@@ -56,7 +56,7 @@ const btnClass = 'flex flex-col space-y-2'
           >
             <img :src="BlackandWhite" alt="Black-and-White" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <span class="text-white text-xl font-bold">Black and White</span>
+              <span class="text-white text-[20px] font-bold">Black and White</span>
             </div>
           </router-link>
           <!--  -->
@@ -66,7 +66,7 @@ const btnClass = 'flex flex-col space-y-2'
           >
             <img :src="Abstract" alt="Abstract" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <span class="text-white text-xl font-bold">Abstract</span>
+              <span class="text-white text-[20px] font-bold">Abstract</span>
             </div>
           </router-link>
         </div>
@@ -79,7 +79,7 @@ const btnClass = 'flex flex-col space-y-2'
           >
             <img :src="Space" alt="Space" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <span class="text-white text-xl font-bold">Space</span>
+              <span class="text-white text-[20px] font-bold">Space</span>
             </div>
           </router-link>
           <!--  -->
@@ -89,7 +89,7 @@ const btnClass = 'flex flex-col space-y-2'
           >
             <img :src="Minimal" alt="Minimal" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <span class="text-white text-xl font-bold">Minimal</span>
+              <span class="text-white text-[20px] font-bold">Minimal</span>
             </div>
           </router-link>
         </div>
@@ -102,7 +102,7 @@ const btnClass = 'flex flex-col space-y-2'
           >
             <img :src="Animals" alt="Animals" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <span class="text-white text-xl font-bold">Animals</span>
+              <span class="text-white text-[20px] font-bold">Animals</span>
             </div>
           </router-link>
           <!--  -->
@@ -112,7 +112,7 @@ const btnClass = 'flex flex-col space-y-2'
           >
             <img :src="Sky" alt="Sky" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <span class="text-white text-xl font-bold">Sky</span>
+              <span class="text-white text-[20px] font-bold">Sky</span>
             </div>
           </router-link>
         </div>
@@ -125,7 +125,7 @@ const btnClass = 'flex flex-col space-y-2'
           >
             <img :src="Flowers" alt="Flowers" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <span class="text-white text-xl font-bold">Flowers</span>
+              <span class="text-white text-[20px] font-bold">Flowers</span>
             </div>
           </router-link>
           <!--  -->
@@ -135,7 +135,7 @@ const btnClass = 'flex flex-col space-y-2'
           >
             <img :src="Travel" alt="Travel" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <span class="text-white text-xl font-bold">Travel</span>
+              <span class="text-white text-[20px] font-bold">Travel</span>
             </div>
           </router-link>
         </div>
@@ -148,7 +148,7 @@ const btnClass = 'flex flex-col space-y-2'
           >
             <img :src="Underwater" alt="Underwater" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <span class="text-white text-xl font-bold">Underwater</span>
+              <span class="text-white text-[20px] font-bold">Underwater</span>
             </div>
           </router-link>
           <!--  -->
@@ -158,7 +158,7 @@ const btnClass = 'flex flex-col space-y-2'
           >
             <img :src="Drones" alt="Drones" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <span class="text-white text-xl font-bold">Drones</span>
+              <span class="text-white text-[20px] font-bold">Drones</span>
             </div>
           </router-link>
         </div>
@@ -171,7 +171,7 @@ const btnClass = 'flex flex-col space-y-2'
           >
             <img :src="Architecture" alt="Architecture" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <span class="text-white text-xl font-bold">Architecture</span>
+              <span class="text-white text-[20px] font-bold">Architecture</span>
             </div>
           </router-link>
           <!--  -->
@@ -181,7 +181,7 @@ const btnClass = 'flex flex-col space-y-2'
           >
             <img :src="Gradients" alt="Gradients" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-              <span class="text-white text-xl font-bold">Gradients</span>
+              <span class="text-white text-[20px] font-bold">Gradients</span>
             </div>
           </router-link>
         </div>

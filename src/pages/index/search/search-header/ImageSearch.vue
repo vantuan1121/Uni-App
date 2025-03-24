@@ -58,7 +58,9 @@ watch(searchQuery, () => {
     <!-- Thanh tìm kiếm luôn cố định trên cùng -->
     <SearchHeader v-model="searchQuery" />
 
-    <div class="flex-1 overflow-auto -mt-[30px]">
+    <div class="flex-1 overflow-auto mt-[20px]">
+      <div class="h-13">
+      </div>
       <div v-if="isLoading" class="text-center text-gray-500">
         <span class="animate-pulse">Đang tải...</span>
       </div>
