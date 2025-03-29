@@ -20,6 +20,11 @@
       "style": {}
     },
     {
+      "path": "pages/index/search/Tab/TabBar",
+      "aliasPath": "/TabBar",
+      "style": {}
+    },
+    {
       "path": "pages/index/search/browse/browse-menu/Nature",
       "aliasPath": "/Nature",
       "style": {}

@@ -1,47 +1,83 @@
-const ACCESS_KEY = 'G8jz0wdZTEYKFLULho7RzugtdZJUriLzDOSPEUfJwmw'
+import { un } from '@uni-helper/uni-network'
 
-// Hàm gọi API chung
-async function unsplashRequest(endpoint, params = {}) {
+const UNSPLASH_ACCESS_KEY = 'V9O0YDnneiSTnvtdkxH9YSHr-ObO-4PKCxxh0UU4Epw'
+
+const BASE_URL = 'https://api.unsplash.com'
+
+// Ảnh mới
+async function getLatestPhotos(page = 1, perpage = 30) {
   try {
-    const response = await new Promise((resolve, reject) => {
-      uni.request({
-        url: `https://api.unsplash.com/${endpoint}`,
-        method: 'GET',
-        header: {
-          Authorization: `Client-ID ${ACCESS_KEY}`,
-        },
-        data: params,
-        success: (res) => {
-          if (res.statusCode === 200) {
-            resolve(res.data)
-          }
-          else {
-            console.error(`Lỗi API Unsplash: ${res.statusCode}`, res)
-            resolve([])
-          }
-        },
-        fail: (err) => {
-          console.error('Lỗi mạng:', err)
-          reject(err)
-        },
-      })
+    const response = await un.get(`${BASE_URL}/photos`, {
+      params: {
+        client_id: UNSPLASH_ACCESS_KEY,
+        page,
+        per_page: perpage,
+        order_by: 'latest',
+      },
     })
-
-    return response
+    return response.data
   }
   catch (error) {
-    console.error('Lỗi khi gọi API:', error)
+    console.error('Lỗi:', error.message || error)
     return []
   }
 }
 
-// Hàm lấy ảnh ngẫu nhiên
-export async function fetchUnsplashImages(page = 1, perPage = 10) {
-  return await unsplashRequest('photos', { page, per_page: perPage })
+// Tìm kiếm
+async function getImageSearch(query, page = 1, perpage = 30) {
+  try {
+    const response = await un.get(`${BASE_URL}/search/photos`, {
+      params: {
+        client_id: UNSPLASH_ACCESS_KEY,
+        query,
+        page,
+        per_page: perpage,
+      },
+    })
+    return response.data.results || []
+  }
+  catch (error) {
+    console.error('Lỗi:', error.message || error)
+    return []
+  }
 }
 
-// Hàm tìm kiếm ảnh theo từ khóa
-export async function searchUnsplashImages(query, page = 1, perPage = 10) {
-  const data = await unsplashRequest('search/photos', { query, page, per_page: perPage })
-  return data.results || []
+// Tìm kiếm bộ sưu tập ảnh
+async function getCollectionSearch(query, page = 1, perpage = 30) {
+  try {
+    const response = await un.get(`${BASE_URL}/search/collections`, {
+      params: {
+        client_id: UNSPLASH_ACCESS_KEY,
+        query,
+        page,
+        per_page: perpage,
+      },
+    })
+    return response.data.results || []
+  }
+  catch (error) {
+    console.error('Lỗi:', error.message || error)
+    return []
+  }
 }
+
+// Tìm kiếm user
+async function getUserSearch(query, page = 1, perPage = 10) {
+  try {
+    const response = await un.get(`${BASE_URL}/search/users`, {
+      params: {
+        client_id: UNSPLASH_ACCESS_KEY,
+        query,
+        page,
+        per_page: perPage,
+      },
+    })
+    return response.data.results || []
+  }
+  catch (error) {
+    console.error('Lỗi:', error.message || error)
+    return []
+  }
+}
+
+export { getLatestPhotos, getImageSearch, getCollectionSearch, getUserSearch }

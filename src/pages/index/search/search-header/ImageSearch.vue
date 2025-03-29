@@ -1,65 +1,115 @@
 <script setup>
-import { ref, watch } from 'vue'
-import { onLoad } from '@dcloudio/uni-app'
+import { defineProps, onMounted, ref, watch } from 'vue'
 import SearchHeader from './SearchHeader.vue'
-import { searchUnsplashImages } from '@/api/unsplash/unsplashAPI'
+import { getImageSearch } from '@/api/unsplash/unsplashAPI'
 
-const searchQuery = ref('')
-const images = ref([])
-const leftColumn = ref([]) // Cột chứa ảnh chẵn
-const rightColumn = ref([]) // Cột chứa ảnh lẻ
-const isLoading = ref(false)
-const errorMessage = ref('')
-
-// Lấy từ khóa tìm kiếm từ query params khi trang load
-onLoad((options) => {
-  if (options.query) {
-    searchQuery.value = decodeURIComponent(options.query)
-    fetchImages()
-  }
+const props = defineProps({
+  query: String, // Nhận từ khóa từ TabBar.vue
 })
 
-// Hàm gọi API tìm kiếm ảnh
-async function fetchImages() {
-  if (!searchQuery.value.trim())
+const searchQuery = ref(props.query || '')
+const images = ref([])
+const masonryColumns = ref(2)
+const columns = ref(Array.from({ length: masonryColumns.value }, () => []))
+const isLoading = ref(false)
+const errorMessage = ref('')
+const currentPage = ref(1)
+const hasMore = ref(true)
+
+// Hàm phân phối ảnh vào các cột
+function distributeImagesToColumns(newImages) {
+  columns.value = Array.from({ length: masonryColumns.value }, () => [])
+
+  newImages.forEach((image) => {
+    const shortestColumnIndex = columns.value.reduce((minIndex, column, index, arr) =>
+      column.reduce((sum, img) => sum + img.estimatedHeight, 0)
+      < arr[minIndex].reduce((sum, img) => sum + img.estimatedHeight, 0)
+        ? index
+        : minIndex, 0)
+
+    columns.value[shortestColumnIndex].push({
+      ...image,
+      estimatedHeight: calculateEstimatedHeight(image),
+    })
+  })
+}
+
+function calculateEstimatedHeight(image, targetWidth = 500) {
+  const aspectRatio = image.height / image.width
+  return Math.round(targetWidth * aspectRatio)
+}
+
+// Gọi API tìm kiếm ảnh
+async function fetchImages(isLoadMore = false) {
+  if (!searchQuery.value.trim() || isLoading.value)
     return
 
   isLoading.value = true
   errorMessage.value = ''
-  images.value = []
-  leftColumn.value = []
-  rightColumn.value = []
+
+  if (!isLoadMore) {
+    images.value = []
+    columns.value = Array.from({ length: masonryColumns.value }, () => [])
+    currentPage.value = 1
+    hasMore.value = true
+  }
 
   try {
-    const results = await searchUnsplashImages(searchQuery.value)
-    images.value = results
+    const results = await getImageSearch(searchQuery.value, currentPage.value)
 
-    // Chia ảnh vào hai cột
-    leftColumn.value = results.filter((_, index) => index % 2 === 0) // Chẵn
-    rightColumn.value = results.filter((_, index) => index % 2 !== 0) // Lẻ
+    if (results.length === 0) {
+      hasMore.value = false
+      return
+    }
+
+    images.value = [...images.value, ...results]
+    distributeImagesToColumns(images.value)
+    currentPage.value++
   }
   catch (error) {
     console.error('Lỗi khi gọi API:', error)
     errorMessage.value = 'Không thể tải ảnh. Vui lòng thử lại!'
+    hasMore.value = false
   }
   finally {
     isLoading.value = false
   }
 }
 
-// Theo dõi thay đổi của searchQuery để tìm kiếm lại ảnh khi từ khóa thay đổi
+// Theo dõi sự thay đổi của searchQuery
 watch(searchQuery, () => {
   fetchImages()
+})
+
+// Theo dõi sự thay đổi của props.query
+watch(() => props.query, (newQuery) => {
+  searchQuery.value = newQuery
+  fetchImages()
+}, { immediate: true })
+
+// Hàm xử lý sự kiện cuộn trang
+function onScroll(event) {
+  const { scrollTop, scrollHeight, clientHeight } = event.target
+  if (scrollTop + clientHeight >= scrollHeight - 200 && !isLoading.value && hasMore.value) {
+    fetchImages(true)
+  }
+}
+
+// Gắn sự kiện cuộn khi component được mount
+onMounted(() => {
+  const scrollContainer = document.querySelector('.scroll-container')
+  if (scrollContainer) {
+    scrollContainer.addEventListener('scroll', onScroll)
+  }
 })
 </script>
 
 <template>
   <div class="flex flex-col h-screen">
-    <!-- Thanh tìm kiếm luôn cố định trên cùng -->
     <SearchHeader v-model="searchQuery" />
 
-    <div class="flex-1 overflow-auto mt-[20px]">
-      <div v-if="isLoading" class="text-center text-gray-500">
+    <div class="flex-1 overflow-auto mt-[15px] scroll-container">
+      <div v-if="isLoading && !images.length" class="text-center text-gray-500">
         <span class="animate-pulse">Đang tải...</span>
       </div>
       <div v-else-if="errorMessage" class="text-center text-red-500">
@@ -69,40 +119,24 @@ watch(searchQuery, () => {
         Không tìm thấy kết quả nào.
       </div>
 
-      <div v-else class="grid grid-cols-2 gap-1">
-        <!-- Cột 1: Ảnh chẵn -->
-        <div class="flex flex-col gap-1">
-          <div v-for="image in leftColumn" :key="image.id" class="relative overflow-hidden shadow-md">
-            <a :href="image.links.html" target="_blank">
-              <img
-                :src="image.urls.small"
-                :alt="image.alt_description"
-                class="w-full h-auto object-cover"
-              />
-            </a>
-            <!-- Hiển thị tên tác giả -->
+      <div v-else class="grid grid-cols-2 gap-[1px]">
+        <div v-for="(column, columnIndex) in columns" :key="columnIndex" class="flex flex-col gap-[1px]">
+          <div v-for="image in column" :key="image.id" class="relative overflow-hidden shadow-md">
+            <img
+              :src="image.urls.small"
+              :alt="image.alt_description"
+              class="w-full h-auto object-contain"
+              style="max-height: 500px;"
+            />
             <div class="absolute bottom-0 left-0 right-0 text-white font-bold p-2">
               {{ image.user.name }}
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Cột 2: Ảnh lẻ -->
-        <div class="flex flex-col gap-1">
-          <div v-for="image in rightColumn" :key="image.id" class="relative  overflow-hidden shadow-md">
-            <a :href="image.links.html" target="_blank">
-              <img
-                :src="image.urls.small"
-                :alt="image.alt_description"
-                class="w-full h-auto object-cover"
-              />
-            </a>
-            <!-- Hiển thị tên tác giả -->
-            <div class="absolute bottom-0 left-0 right-0 text-white font-bold p-2">
-              {{ image.user.name }}
-            </div>
-          </div>
-        </div>
+      <div v-if="isLoading && images.length > 0" class="text-center text-gray-500 py-4">
+        <span class="animate-pulse">Đang tải thêm...</span>
       </div>
     </div>
   </div>

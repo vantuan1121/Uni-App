@@ -59,7 +59,7 @@ function handleSearch(event) {
   if (event.key === 'Enter' && searchQuery.value.trim()) {
     saveSearchQuery(searchQuery.value)
     uni.navigateTo({
-      url: `/pages/index/search/search-header/ImageSearch?query=${encodeURIComponent(searchQuery.value)}`,
+      url: `/pages/index/search/Tab/TabBar?query=${encodeURIComponent(searchQuery.value)}`,
     })
     isSearching.value = false
   }

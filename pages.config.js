@@ -21,6 +21,10 @@ export default defineUniPages({
       aliasPath: '/ImageSearch',
     },
     {
+      path: 'pages/index/search/Tab/TabBar',
+      aliasPath: '/TabBar',
+    },
+    {
       path: 'pages/index/search/browse/browse-menu/Nature',
       aliasPath: '/Nature',
     },
