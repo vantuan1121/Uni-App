@@ -61,6 +61,24 @@ async function getCollectionSearch(query, page = 1, perpage = 30) {
   }
 }
 
+// Lấy ảnh từ bộ sưu tập
+async function getCollectionPhotos(collectionId, page = 1, perpage = 30) {
+  try {
+    const response = await un.get(`${BASE_URL}/collections/${collectionId}/photos`, {
+      params: {
+        client_id: UNSPLASH_ACCESS_KEY,
+        page,
+        per_page: perpage,
+      },
+    })
+    return response.data || []
+  }
+  catch (error) {
+    console.error('Lỗi khi lấy ảnh từ bộ sưu tập:', error.message || error)
+    return []
+  }
+}
+
 // Tìm kiếm user
 async function getUserSearch(query, page = 1, perPage = 10) {
   try {
@@ -80,4 +98,27 @@ async function getUserSearch(query, page = 1, perPage = 10) {
   }
 }
 
-export { getLatestPhotos, getImageSearch, getCollectionSearch, getUserSearch }
+// Lấy thông tin chi tiết người dùng
+async function getUserProfile(username) {
+  try {
+    const response = await un.get(`${BASE_URL}/users/${username}`, {
+      params: {
+        client_id: UNSPLASH_ACCESS_KEY,
+      },
+    })
+    return response.data
+  }
+  catch (error) {
+    console.error('Lỗi khi lấy thông tin người dùng:', error.message || error)
+    throw error
+  }
+}
+
+export {
+  getLatestPhotos,
+  getImageSearch,
+  getCollectionSearch,
+  getCollectionPhotos,
+  getUserSearch,
+  getUserProfile,
+}

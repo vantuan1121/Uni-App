@@ -181,7 +181,6 @@ onMounted(() => {
     </div>
 
     <!-- Photo Viewer Modal -->
-    <!-- Photo Viewer Modal -->
     <div
       v-if="showPhotoViewer"
       class="fixed inset-0 bg-black z-50 flex flex-col"
@@ -207,11 +206,11 @@ onMounted(() => {
       </div>
 
       <!-- Ảnh và thông tin -->
-      <div class="flex-1 flex items-center justify-center overflow-hidden">
+      <div class="flex-1 flex items-center justify-center overflow-hidden w-full h-full">
         <img
           v-if="allPhotos[currentPhotoIndex]"
           :src="allPhotos[currentPhotoIndex].urls.regular"
-          class="max-w-full max-h-full object-contain"
+          class="w-full h-full object-cover"
           alt="Photo"
         />
       </div>
