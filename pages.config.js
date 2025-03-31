@@ -25,6 +25,10 @@ export default defineUniPages({
       aliasPath: '/TabBar',
     },
     {
+      path: 'pages/index/search/search-header/UserDetail',
+      aliasPath: '/UserDetail',
+    },
+    {
       path: 'pages/index/search/browse/browse-menu/Nature',
       aliasPath: '/Nature',
     },

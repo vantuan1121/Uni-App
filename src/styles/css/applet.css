@@ -12,3 +12,7 @@ navigator {
 button {
   background-color: transparent;
 }
+
+.uni-page-head {
+  display: none !important;
+}

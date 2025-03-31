@@ -1,6 +1,6 @@
 import { un } from '@uni-helper/uni-network'
 
-const UNSPLASH_ACCESS_KEY = 'V9O0YDnneiSTnvtdkxH9YSHr-ObO-4PKCxxh0UU4Epw'
+const UNSPLASH_ACCESS_KEY = 'yQ6-aeStBbhtpc4WY4Dk6toVmyKQ6GcpiSqyNLLqkXM'
 
 const BASE_URL = 'https://api.unsplash.com'
 
@@ -12,7 +12,7 @@ async function getLatestPhotos(page = 1, perpage = 30) {
         client_id: UNSPLASH_ACCESS_KEY,
         page,
         per_page: perpage,
-        order_by: 'latest',
+        // order_by: 'latest',
       },
     })
     return response.data
@@ -80,7 +80,7 @@ async function getCollectionPhotos(collectionId, page = 1, perpage = 30) {
 }
 
 // Tìm kiếm user
-async function getUserSearch(query, page = 1, perPage = 10) {
+async function getUserSearch(query, page = 1, perPage = 30) {
   try {
     const response = await un.get(`${BASE_URL}/search/users`, {
       params: {
@@ -109,7 +109,61 @@ async function getUserProfile(username) {
     return response.data
   }
   catch (error) {
-    console.error('Lỗi khi lấy thông tin người dùng:', error.message || error)
+    console.error('Lỗi:', error.message || error)
+    throw error
+  }
+}
+
+// Lấy ảnh của người dùng
+async function getUserPhotos(username, page = 1, perPage = 30) {
+  try {
+    const response = await un.get(`${BASE_URL}/users/${username}/photos`, {
+      params: {
+        client_id: UNSPLASH_ACCESS_KEY,
+        page,
+        per_page: perPage,
+      },
+    })
+    return response.data
+  }
+  catch (error) {
+    console.error('Lỗi khi lấy ảnh của người dùng:', error.message || error)
+    throw error
+  }
+}
+
+// Lấy ảnh đã thích của người dùng
+async function getUserLikes(username, page = 1, perPage = 30) {
+  try {
+    const response = await un.get(`${BASE_URL}/users/${username}/likes`, {
+      params: {
+        client_id: UNSPLASH_ACCESS_KEY,
+        page,
+        per_page: perPage,
+      },
+    })
+    return response.data
+  }
+  catch (error) {
+    console.error('Lỗi khi lấy ảnh đã thích của người dùng:', error.message || error)
+    throw error
+  }
+}
+
+// Lấy bộ sưu tập của người dùng
+async function getUserCollections(username, page = 1, perPage = 30) {
+  try {
+    const response = await un.get(`${BASE_URL}/users/${username}/collections`, {
+      params: {
+        client_id: UNSPLASH_ACCESS_KEY,
+        page,
+        per_page: perPage,
+      },
+    })
+    return response.data
+  }
+  catch (error) {
+    console.error('Lỗi khi lấy bộ sưu tập của người dùng:', error.message || error)
     throw error
   }
 }
@@ -121,4 +175,7 @@ export {
   getCollectionPhotos,
   getUserSearch,
   getUserProfile,
+  getUserPhotos,
+  getUserLikes,
+  getUserCollections,
 }

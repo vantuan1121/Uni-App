@@ -9,7 +9,7 @@ import ShowPhoto from '@/pages/index/search/ShowPhoto.vue'
     <SearchHeader></SearchHeader>
   </div>
 
-  <div class="mt-[30px]">
+  <div class="mt-[60px]">
     <h1 class="font-bold text-[26px] ml-[30px]">
       Browse by Category
     </h1>

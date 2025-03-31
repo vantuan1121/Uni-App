@@ -25,6 +25,11 @@
       "style": {}
     },
     {
+      "path": "pages/index/search/search-header/UserDetail",
+      "aliasPath": "/UserDetail",
+      "style": {}
+    },
+    {
       "path": "pages/index/search/browse/browse-menu/Nature",
       "aliasPath": "/Nature",
       "style": {}

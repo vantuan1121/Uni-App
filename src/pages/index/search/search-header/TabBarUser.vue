@@ -1,11 +1,25 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, defineAsyncComponent, markRaw, ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
-import ImageSearch from '@/pages/index/search/search-header/ImageSearch.vue'
-import CollectionList from '@/pages/index/search/search-header/CollectionList.vue'
-import UserList from '@/pages/index/search/search-header/UserList.vue'
 
-const tabs = ref(['Photos', 'Collections', 'Users'])
+// Import các component tab từ đường dẫn tuyệt đối
+const Photos = defineAsyncComponent(() => import('@/pages/index/search/search-header/user-details/Photos.vue'))
+const Likes = defineAsyncComponent(() => import('@/pages/index/search/search-header/user-details/Likes.vue'))
+const Collections = defineAsyncComponent(() => import('@/pages/index/search/search-header/user-details/Collections.vue'))
+
+// Hoặc nếu đang ở cùng thư mục user-details, bạn có thể dùng import tương đối:
+// const Photos = defineAsyncComponent(() => import('./Photos.vue'))
+// const Likes = defineAsyncComponent(() => import('./Likes.vue'))
+// const Collections = defineAsyncComponent(() => import('./Collections.vue'))
+
+// Mapping tab name với component tương ứng
+const tabComponents = {
+  Photos: markRaw(Photos),
+  Likes: markRaw(Likes),
+  Collections: markRaw(Collections),
+}
+
+const tabs = ref(['Photos', 'Likes', 'Collections'])
 const activeTab = ref('Photos')
 const searchQuery = ref('')
 const tabWidth = ref(0)
@@ -23,6 +37,11 @@ function calculateTabWidth() {
 const slideTransform = computed(() => {
   const tabIndex = tabs.value.findIndex(tab => tab === activeTab.value)
   return `translateX(${tabIndex * tabWidth.value}px)`
+})
+
+// Component hiện tại dựa trên tab đang active
+const currentComponent = computed(() => {
+  return tabComponents[activeTab.value]
 })
 
 // Lắng nghe sự kiện resize của cửa sổ
@@ -48,20 +67,20 @@ function shouldShowSeparator(tabIndex) {
   if (activeTab.value === 'Photos' && tabIndex === 0) {
     return false // Ẩn thanh giữa Photos và Collections
   }
-  if (activeTab.value === 'Users' && tabIndex === 1) {
+  if (activeTab.value === 'Collections' && tabIndex === 1) {
     return false // Ẩn thanh giữa Collections và Users
   }
-  if (activeTab.value === 'Collections') {
-    return false // Ẩn cả 2 thanh khi ở Collections
+  if (activeTab.value === 'Likes') {
+    return false // Ẩn cả 2 thanh khi ở Likes
   }
   return true
 }
 </script>
 
 <template>
-  <div class="flex flex-col h-screen mt-[45px]">
+  <div class="flex flex-col h-screen">
     <!-- TabBar cố định trên cùng với khoảng cách 20px mỗi bên -->
-    <div class="fixed mt-4 left-0 w-full z-30 bg-white px-5">
+    <div class="mt left-0 w-full bg-white px-5">
       <div class="flex justify-center items-center py-2">
         <div
           ref="tabBarRef"
@@ -75,7 +94,6 @@ function shouldShowSeparator(tabIndex) {
               transform: slideTransform,
             }"
           ></div>
-
           <!-- Các tab -->
           <div
             v-for="(tab, tabIndex) in tabs"
@@ -99,11 +117,9 @@ function shouldShowSeparator(tabIndex) {
       </div>
     </div>
 
-    <!-- Nội dung có thể cuộn -->
-    <div class="mt-16 flex-1 overflow-auto">
-      <ImageSearch v-if="activeTab === 'Photos'" :query="searchQuery" />
-      <CollectionList v-else-if="activeTab === 'Collections'" :query="searchQuery" />
-      <UserList v-else-if="activeTab === 'Users'" :query="searchQuery" />
+    <!-- Phần nội dung -->
+    <div class="flex-1 overflow-auto">
+      <component :is="currentComponent" :search-query="searchQuery" />
     </div>
   </div>
 </template>
