@@ -12,17 +12,17 @@ const emit = defineEmits(['selectSearch', 'clearHistory'])
 <template>
   <div
     v-if="searchHistory.length || trendingSearches.length"
-    class="fixed inset-0 bg-white z-40 overflow-auto max-h-screen px-4 pt-[50px]"
+    class="fixed inset-0 bg-[#111111] z-40 overflow-auto max-h-screen px-4 pt-[50px]"
   >
     <!-- Lịch sử tìm kiếm -->
     <div class="h-20px"></div>
     <div v-if="searchHistory.length" class="">
       <div class="flex justify-between items-center">
-        <h3 class="text-sm font-semibold text-gray-600 mb-2">
+        <h3 class="text-sm font-semibold text-white mb-2">
           Recent
         </h3>
         <span
-          class="text-sm text-gray-500 cursor-pointer translate-y-[-5px]"
+          class="text-sm text-white cursor-pointer translate-y-[-5px]"
           @click.stop="emit('clearHistory')"
         >
           Clear
@@ -32,7 +32,7 @@ const emit = defineEmits(['selectSearch', 'clearHistory'])
         <li
           v-for="query in searchHistory"
           :key="query"
-          class="flex items-center gap-2 cursor-pointer px-3 py-2 text-black font-bold border-b border-gray-300"
+          class="flex items-center gap-2 cursor-pointer px-3 py-2 text-white font-bold border-b border-gray-300"
           @click="emit('selectSearch', query)"
         >
           <span>
@@ -45,14 +45,14 @@ const emit = defineEmits(['selectSearch', 'clearHistory'])
 
     <!-- Xu hướng tìm kiếm -->
     <div v-if="trendingSearches.length" class="mt-[10px]">
-      <h3 class="text-sm font-semibold text-gray-600 mb-2">
+      <h3 class="text-sm font-semibold text-white mb-2">
         Trending
       </h3>
       <ul class="flex flex-col">
         <li
           v-for="trend in trendingSearches"
           :key="trend"
-          class="flex items-center gap-2 cursor-pointer px-3 py-2 text-black font-bold border-b border-gray-300"
+          class="flex items-center gap-2 cursor-pointer px-3 py-2 text-white font-bold border-b border-gray-300"
           @click="emit('selectSearch', trend)"
         >
           <span>

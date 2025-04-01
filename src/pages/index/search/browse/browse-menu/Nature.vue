@@ -1,11 +1,12 @@
 <script setup>
 import { computed, nextTick, onMounted, ref } from 'vue'
-import { getImageSearch } from '@/api/unsplash/unsplashAPI'
+import { getTopicPhotos } from '@/api/unsplash/unsplashAPI'
 
 // Khai báo các biến reactive
 const masonryColumns = ref(2) // Số cột hiển thị trong gallery
 const columns = ref(Array.from({ length: masonryColumns.value }, () => [])) // Mảng chứa dữ liệu các cột
-const query = 'Nature' // Từ khóa tìm kiếm ảnh
+const topicId = ref('nature') // ID của topic trên Unsplash
+const topicTitle = ref('Nature') // Tên hiển thị của topic
 const perPage = 30 // Số lượng ảnh tải về mỗi lần
 const page = ref(1) // Trang hiện tại để phân trang
 const loading = ref(false) // Trạng thái đang tải ảnh
@@ -14,15 +15,25 @@ const selectedImage = ref(null) // Ảnh được chọn để xem chi tiết
 const showDetail = ref(false) // Điều khiển hiển thị chế độ xem chi tiết
 const selectedImageIndex = ref(-1) // Chỉ số của ảnh đang xem trong mảng allImages
 const scrollPosition = ref(0) // Lưu vị trí cuộn trước khi xem chi tiết
+const allImagesFlat = ref([]) // Mảng phẳng lưu tất cả ảnh theo thứ tự tải về
 
 // Tạo mảng phẳng của tất cả ảnh để dễ dàng điều hướng qua trái phải
+// Sử dụng computed property để luôn cập nhật khi columns thay đổi
 const allImages = computed(() => {
+  // Tạo mảng phẳng chứa tất cả ảnh từ mọi cột
+  // Sắp xếp theo thứ tự đan xen giữa các cột
+  // Ví dụ: cột1[0], cột2[0], cột1[1], cột2[1], ...
+  const maxLength = Math.max(...columns.value.map(col => col.length))
   const images = []
-  columns.value.forEach((column) => {
-    column.forEach((image) => {
-      images.push(image)
-    })
-  })
+
+  for (let i = 0; i < maxLength; i++) {
+    for (let j = 0; j < columns.value.length; j++) {
+      if (columns.value[j][i]) {
+        images.push(columns.value[j][i])
+      }
+    }
+  }
+
   return images
 })
 
@@ -43,6 +54,9 @@ function calculateEstimatedHeight(image, targetWidth = 500) {
  * @param {Array} newImages - Mảng các ảnh mới cần phân phối
  */
 function distributeImagesToColumns(newImages) {
+  // Lưu tất cả ảnh vào mảng phẳng theo thứ tự tải về
+  allImagesFlat.value.push(...newImages)
+
   newImages.forEach((image) => {
     // Tìm cột có chiều cao nhỏ nhất để thêm ảnh
     const shortestColumnIndex = columns.value.reduce((minIndex, column, index, arr) =>
@@ -54,12 +68,13 @@ function distributeImagesToColumns(newImages) {
     columns.value[shortestColumnIndex].push({
       ...image,
       estimatedHeight: calculateEstimatedHeight(image),
+      columnIndex: shortestColumnIndex, // Lưu lại thông tin cột để debug nếu cần
     })
   })
 }
 
 /**
- * Tải ảnh từ API Unsplash và phân phối vào các cột
+ * Tải ảnh từ API Unsplash theo topic và phân phối vào các cột
  * Tự động tăng số trang khi hoàn thành
  */
 async function fetchImages() {
@@ -70,8 +85,8 @@ async function fetchImages() {
   loading.value = true
 
   try {
-    // Gọi API để lấy dữ liệu ảnh
-    const images = await getImageSearch(query, page.value, perPage)
+    // Gọi API để lấy dữ liệu ảnh theo topic
+    const images = await getTopicPhotos(topicId.value, page.value, perPage)
 
     // Nếu không còn ảnh nào, đánh dấu không còn dữ liệu để tải
     if (images.length === 0) {
@@ -86,7 +101,7 @@ async function fetchImages() {
     page.value++
   }
   catch (error) {
-    console.error('Lỗi khi tải ảnh:', error)
+    console.error('Lỗi khi tải ảnh từ topic:', error)
     hasMore.value = false
   }
   finally {
@@ -126,7 +141,7 @@ function handleImageClick(image) {
   // Lưu vị trí cuộn hiện tại trước khi chuyển sang xem chi tiết
   scrollPosition.value = window.scrollY || window.pageYOffset
 
-  // Tìm chỉ số của ảnh trong mảng allImages
+  // Tìm chỉ số của ảnh trong mảng allImages mới (mảng đan xen)
   const index = allImages.value.findIndex(img => img.id === image.id)
   if (index !== -1) {
     selectedImageIndex.value = index
@@ -169,6 +184,8 @@ function nextImage() {
   else if (hasMore.value) {
     // Nếu đang ở ảnh cuối cùng và còn ảnh để tải, tải thêm ảnh
     fetchImages().then(() => {
+      // Sau khi tải thêm ảnh, kiểm tra lại allImages.value và chỉ số
+      // do allImages là computed nên sẽ tự cập nhật khi columns thay đổi
       if (allImages.value.length > selectedImageIndex.value + 1) {
         selectedImageIndex.value++
         selectedImage.value = allImages.value[selectedImageIndex.value]
@@ -237,6 +254,7 @@ function handleTouchEnd() {
 onMounted(() => {
   // Tải ảnh đầu tiên
   fetchImages()
+
   // Thiết lập cuộn vô hạn
   setupInfiniteScroll()
 
@@ -255,21 +273,21 @@ onMounted(() => {
 
 <template>
   <!-- Header tabbar - Ẩn khi đang ở chế độ xem chi tiết -->
-  <view v-if="!showDetail" class="fixed top-0 left-0 w-full h-12 bg-white flex items-center px-4 z-100">
+  <view v-if="!showDetail" class="fixed top-0 left-0 w-full h-12 bg-[#111111] flex items-center px-4 z-100">
     <div @click="handleCancel">
       <svg width="27" height="27" viewBox="0 0 32 32">
-        <path d="M21.781 7.844l-9.063 8.594 9.063 8.594q0.25 0.25 0.25 0.609t-0.25 0.578q-0.25 0.25-0.578 0.25t-0.578-0.25l-9.625-9.125q-0.156-0.125-0.203-0.297t-0.047-0.359q0-0.156 0.047-0.328t0.203-0.297l9.625-9.125q0.25-0.25 0.578-0.25t0.578 0.25q0.25 0.219 0.25 0.578t-0.25 0.578z" fill="#000000"></path>
+        <path d="M21.781 7.844l-9.063 8.594 9.063 8.594q0.25 0.25 0.25 0.609t-0.25 0.578q-0.25 0.25-0.578 0.25t-0.578-0.25l-9.625-9.125q-0.156-0.125-0.203-0.297t-0.047-0.359q0-0.156 0.047-0.328t0.203-0.297l9.625-9.125q0.25-0.25 0.578-0.25t0.578 0.25q0.25 0.219 0.25 0.578t-0.25 0.578z" fill="white"></path>
       </svg>
     </div>
-    <text class="text-lg font-bold mx-auto">
-      Nature
+    <text class="text-lg font-bold mx-auto text-white">
+      {{ topicTitle }}
     </text>
   </view>
 
   <!-- Chế độ xem chi tiết - Hiển thị khi người dùng click vào ảnh -->
   <div
     v-if="showDetail"
-    class="fixed inset-0 bg-black z-50 flex flex-col"
+    class="fixed inset-0 bg-[#111111] z-50 flex flex-col"
     @touchstart="handleTouchStart"
     @touchmove="handleTouchMove"
     @touchend="handleTouchEnd"
@@ -294,13 +312,15 @@ onMounted(() => {
         :alt="selectedImage.alt_description"
         class="max-w-full max-h-full object-contain"
       />
+
+      <!-- Hiển thị nút điều hướng (tùy chọn) -->
     </div>
   </div>
 
   <!-- Phần gallery chính - Ẩn khi đang ở chế độ xem chi tiết -->
-  <div v-if="!showDetail" class="">
-    <!-- Thêm padding-top để tránh bị header che khuất -->
-    <div class="grid grid-cols-2 gap-[1px]">
+  <div v-if="!showDetail" class="pt-12">
+    <!-- Grid masonry cho gallery -->
+    <div class="grid grid-cols-2 gap-[1px] bg-[#111111]">
       <!-- Render từng cột -->
       <div
         v-for="(column, columnIndex) in columns"
@@ -335,9 +355,9 @@ onMounted(() => {
       id="scroll-sentinel"
       class="h-10 w-full text-center text-gray-500"
     >
-      <span v-if="loading" class="animate-pulse">Đang tải...</span>
+      <span v-if="loading" class="animate-pulse"></span>
       <span v-else-if="!hasMore && columns[0].length > 0">
-        Không còn ảnh để tải
+        No more images to load
       </span>
     </div>
   </div>

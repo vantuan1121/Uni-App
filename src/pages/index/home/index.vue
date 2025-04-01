@@ -3,5 +3,7 @@ import index from '@/pages/index/search/index.vue'
 </script>
 
 <template>
-  <index></index>
+  <div class="bg-[#111111]">
+    <index></index>
+  </div>
 </template>

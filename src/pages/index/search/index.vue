@@ -10,7 +10,7 @@ import ShowPhoto from '@/pages/index/search/ShowPhoto.vue'
   </div>
 
   <div class="mt-[60px]">
-    <h1 class="font-bold text-[26px] ml-[30px]">
+    <h1 class="font-bold text-white text-[26px] ml-[30px]">
       Browse by Category
     </h1>
     <div>
@@ -19,7 +19,7 @@ import ShowPhoto from '@/pages/index/search/ShowPhoto.vue'
   </div>
 
   <div>
-    <h1 class="font-bold text-[26px] mt-[30px] ml-[30px]">
+    <h1 class="font-bold text-white text-[26px] mt-[30px] ml-[30px]">
       Discover
     </h1>
   </div>

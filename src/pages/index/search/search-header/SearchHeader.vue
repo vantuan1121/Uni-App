@@ -84,14 +84,14 @@ function handleClickOutside(event) {
 
 <template>
   <div ref="searchBox" class="flex flex-col w-full gap-3">
-    <div class="flex items-center w-full gap-3 fixed top-0 left-0 right-0 bg-white p-3 z-50">
-      <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-200 flex-grow relative">
+    <div class="flex items-center w-full gap-3 fixed top-0 left-0 right-0 bg-[#111111] p-3 z-50">
+      <div class="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#222222] flex-grow relative">
         <img :src="search" alt="search" class="w-5 h-5" />
         <input
           v-model="searchQuery"
           type="text"
           placeholder="Search photos, collections, users"
-          class="flex-1 bg-transparent outline-none text-sm"
+          class="flex-1 bg-transparent outline-none text-sm text-white"
           @focus="handleFocus"
           @keydown.enter="handleSearch"
         />
@@ -101,7 +101,7 @@ function handleClickOutside(event) {
           </svg>
         </span>
       </div>
-      <span v-if="isSearching" class="text-gray-500 text-sm cursor-pointer" @click="handleCancel">
+      <span v-if="isSearching" class="text-white text-sm cursor-pointer" @click="handleCancel">
         Cancel
       </span>
     </div>

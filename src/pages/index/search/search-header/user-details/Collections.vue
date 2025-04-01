@@ -259,7 +259,7 @@ onMounted(() => {
     :class="{ 'fullscreen-mode': isFullscreenMode }"
   >
     <div
-      class="flex-1 overflow-auto scroll-container bg-gray-100"
+      class="flex-1 overflow-auto scroll-container bg-[#111111]"
       :class="{ 'pt-0': isFullscreenMode }"
     >
       <!-- Chế độ xem chi tiết ảnh -->
@@ -281,7 +281,7 @@ onMounted(() => {
             <span v-if="collectionPhotos[selectedPhotoIndex]?.user?.name">
               {{ collectionPhotos[selectedPhotoIndex].user.name }}
             </span>
-            <span v-else>Ẩn danh</span>
+            <span v-else></span>
           </div>
         </div>
 
@@ -299,23 +299,23 @@ onMounted(() => {
       <!-- Hiển thị chi tiết bộ sưu tập khi đã chọn - chế độ toàn màn hình -->
       <div v-else-if="selectedCollection" class="relative">
         <!-- Header cố định nhỏ gọn -->
-        <div class="fixed top-0 left-0 right-0 z-10 bg-white">
+        <div class="fixed top-0 left-0 right-0 z-10 bg-[#111111]">
           <div class="flex items-center p-2">
             <button class="flex -ml-[10px] !bg-transparent !shadow-none !outline-none" @click="backToCollections">
               <svg width="27" height="27" viewBox="0 0 32 32" fill="white">
-                <path d="M21.781 7.844l-9.063 8.594 9.063 8.594q0.25 0.25 0.25 0.609t-0.25 0.578q-0.25 0.25-0.578 0.25t-0.578-0.25l-9.625-9.125q-0.156-0.125-0.203-0.297t-0.047-0.359q0-0.156 0.047-0.328t0.203-0.297l9.625-9.125q0.25-0.25 0.578-0.25t0.578 0.25q0.25 0.219 0.25 0.578t-0.25 0.578z" fill="#000000"></path>
+                <path d="M21.781 7.844l-9.063 8.594 9.063 8.594q0.25 0.25 0.25 0.609t-0.25 0.578q-0.25 0.25-0.578 0.25t-0.578-0.25l-9.625-9.125q-0.156-0.125-0.203-0.297t-0.047-0.359q0-0.156 0.047-0.328t0.203-0.297l9.625-9.125q0.25-0.25 0.578-0.25t0.578 0.25q0.25 0.219 0.25 0.578t-0.25 0.578z" fill="#white"></path>
               </svg>
             </button>
 
             <div class="flex-1 text-center">
-              <div v-if="selectedCollection" class="font-bold truncate">
+              <div v-if="selectedCollection" class="font-bold truncate text-white">
                 {{ selectedCollection.title }}
               </div>
-              <div v-if="selectedCollection" class="text-gray-500 text-xs truncate">
+              <div v-if="selectedCollection" class="text-gray text-xs truncate">
                 Cruated by {{ selectedCollection.user?.name || 'Ẩn danh' }}
               </div>
               <div v-else class="font-bold">
-                Bộ sưu tập
+                Collection
               </div>
             </div>
           </div>
@@ -326,11 +326,11 @@ onMounted(() => {
 
         <!-- Hiển thị ảnh trong bộ sưu tập theo hàng dọc -->
         <div v-if="isLoadingPhotos && !collectionPhotos.length" class="text-center text-gray-500 py-4">
-          <span class="animate-pulse">Đang tải ảnh...</span>
+          <span class="animate-pulse"></span>
         </div>
 
-        <div v-else-if="collectionPhotos.length === 0" class="text-center py-4">
-          Không có ảnh nào trong bộ sưu tập này.
+        <div v-else-if="collectionPhotos.length === 0" class="text-center py-4 text-white">
+          No photos
         </div>
 
         <div v-else class="flex flex-col">
@@ -359,7 +359,7 @@ onMounted(() => {
       <div v-else>
         <!-- Trạng thái đang tải lần đầu -->
         <div v-if="isLoading && !collections.length" class="text-center text-gray-500 py-4">
-          <span class="animate-pulse">Đang tải bộ sưu tập...</span>
+          <span class="animate-pulse"></span>
         </div>
 
         <!-- Trạng thái lỗi -->
@@ -369,10 +369,11 @@ onMounted(() => {
 
         <!-- Không có bộ sưu tập -->
         <div v-else-if="collections.length === 0" class="text-center text-gray-500 py-4">
-          Người dùng này chưa tạo bộ sưu tập nào.
+          No collections
         </div>
 
         <!-- Danh sách bộ sưu tập -->
+        <!-- Thay thế phần hiển thị hình ảnh bộ sưu tập hiện có bằng đoạn code này -->
         <div v-else class="space-y-4 p-4">
           <div
             v-for="collection in collections"
@@ -380,19 +381,51 @@ onMounted(() => {
             class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
             @click="viewCollection(collection)"
           >
-            <!-- Phần ảnh preview của bộ sưu tập -->
-            <div class="relative">
-              <img
-                :src="collection.cover_photo?.urls?.small || '/default-image.png'"
-                :alt="collection.title || 'Bộ sưu tập từ Unsplash'"
-                class="w-full h-40 object-cover"
-              />
-              <div class="absolute bottom-0 w-full bg-[#222222] text-white p-2">
+            <!-- Bố cục hiển thị 3 ảnh, chỉ hiển thị nếu có ảnh -->
+            <div class="relative flex h-40">
+              <!-- Ảnh đầu tiên (luôn hiển thị nếu có cover_photo) -->
+              <div class="flex-1 overflow-hidden">
+                <img
+                  v-if="collection.cover_photo?.urls?.small"
+                  :src="collection.cover_photo.urls.small"
+                  :alt="collection.title || 'Bộ sưu tập từ Unsplash'"
+                  class="w-full h-40 object-cover"
+                />
+                <!-- Nếu không có ảnh bìa, hiển thị một vùng trống -->
+                <div v-else class="w-full h-40 bg-gray-100"></div>
+              </div>
+
+              <!-- Ảnh thứ hai (chỉ hiển thị nếu có) -->
+              <div class="flex-1 overflow-hidden">
+                <img
+                  v-if="collection.preview_photos && collection.preview_photos.length > 1 && collection.preview_photos[1]?.urls?.small"
+                  :src="collection.preview_photos[1].urls.small"
+                  :alt="collection.title || 'Bộ sưu tập từ Unsplash'"
+                  class="w-full h-40 object-cover"
+                />
+                <!-- Nếu không có ảnh thứ hai, hiển thị một vùng trống -->
+                <div v-else class="w-full h-40 bg-gray-100"></div>
+              </div>
+
+              <!-- Ảnh thứ ba (chỉ hiển thị nếu có) -->
+              <div class="flex-1 overflow-hidden">
+                <img
+                  v-if="collection.preview_photos && collection.preview_photos.length > 2 && collection.preview_photos[2]?.urls?.small"
+                  :src="collection.preview_photos[2].urls.small"
+                  :alt="collection.title || 'Bộ sưu tập từ Unsplash'"
+                  class="w-full h-40 object-cover"
+                />
+                <!-- Nếu không có ảnh thứ ba, hiển thị một vùng trống -->
+                <div v-else class="w-full h-40 bg-gray-100"></div>
+              </div>
+
+              <!-- Lớp phủ chứa thông tin bộ sưu tập -->
+              <div class="absolute bottom-0 left-0 right-0 bg-[#222222] text-white p-2">
                 <p class="text-sm font-bold truncate">
-                  {{ collection.title }}
+                  {{ collection.title }} <!-- Tiêu đề bộ sưu tập -->
                 </p>
                 <p class="text-xs">
-                  {{ collection.total_photos }} photos
+                  {{ collection.total_photos }} photos <!-- Số lượng ảnh trong bộ sưu tập -->
                 </p>
               </div>
             </div>
@@ -401,7 +434,7 @@ onMounted(() => {
 
         <!-- Trạng thái tải thêm -->
         <div v-if="isLoading && collections.length > 0" class="text-center text-gray-500 py-4">
-          <span class="animate-pulse">Đang tải thêm bộ sưu tập...</span>
+          <span class="animate-pulse"></span>
         </div>
       </div>
     </div>

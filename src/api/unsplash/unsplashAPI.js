@@ -42,6 +42,43 @@ async function getImageSearch(query, page = 1, perpage = 30) {
   }
 }
 
+// Lấy ảnh theo topic
+async function getTopicPhotos(topicId, page = 1, perpage = 30) {
+  try {
+    const response = await un.get(`${BASE_URL}/topics/${topicId}/photos`, {
+      params: {
+        client_id: UNSPLASH_ACCESS_KEY,
+        page,
+        per_page: perpage,
+      },
+    })
+    return response.data || []
+  }
+  catch (error) {
+    console.error('Lỗi:', error.message || error)
+    return []
+  }
+}
+
+// Lấy danh sách các topics
+async function getTopics(page = 1, perpage = 30, orderBy = 'position') {
+  try {
+    const response = await un.get(`${BASE_URL}/topics`, {
+      params: {
+        client_id: UNSPLASH_ACCESS_KEY,
+        page,
+        per_page: perpage,
+        order_by: orderBy,
+      },
+    })
+    return response.data || []
+  }
+  catch (error) {
+    console.error('Lỗi:', error.message || error)
+    return []
+  }
+}
+
 // Tìm kiếm bộ sưu tập ảnh
 async function getCollectionSearch(query, page = 1, perpage = 30) {
   try {
@@ -98,7 +135,7 @@ async function getUserSearch(query, page = 1, perPage = 30) {
   }
 }
 
-// Lấy thông tin chi tiết người dùng
+// Lấy thông tin chi tiết user
 async function getUserProfile(username) {
   try {
     const response = await un.get(`${BASE_URL}/users/${username}`, {
@@ -114,7 +151,7 @@ async function getUserProfile(username) {
   }
 }
 
-// Lấy ảnh của người dùng
+// Lấy ảnh user
 async function getUserPhotos(username, page = 1, perPage = 30) {
   try {
     const response = await un.get(`${BASE_URL}/users/${username}/photos`, {
@@ -127,12 +164,12 @@ async function getUserPhotos(username, page = 1, perPage = 30) {
     return response.data
   }
   catch (error) {
-    console.error('Lỗi khi lấy ảnh của người dùng:', error.message || error)
+    console.error('Lỗi:', error.message || error)
     throw error
   }
 }
 
-// Lấy ảnh đã thích của người dùng
+// Lấy ảnh đã thích của user
 async function getUserLikes(username, page = 1, perPage = 30) {
   try {
     const response = await un.get(`${BASE_URL}/users/${username}/likes`, {
@@ -145,12 +182,12 @@ async function getUserLikes(username, page = 1, perPage = 30) {
     return response.data
   }
   catch (error) {
-    console.error('Lỗi khi lấy ảnh đã thích của người dùng:', error.message || error)
+    console.error('Lỗi:', error.message || error)
     throw error
   }
 }
 
-// Lấy bộ sưu tập của người dùng
+// Lấy bộ sưu tập của user
 async function getUserCollections(username, page = 1, perPage = 30) {
   try {
     const response = await un.get(`${BASE_URL}/users/${username}/collections`, {
@@ -163,7 +200,7 @@ async function getUserCollections(username, page = 1, perPage = 30) {
     return response.data
   }
   catch (error) {
-    console.error('Lỗi khi lấy bộ sưu tập của người dùng:', error.message || error)
+    console.error('Lỗi:', error.message || error)
     throw error
   }
 }
@@ -171,6 +208,8 @@ async function getUserCollections(username, page = 1, perPage = 30) {
 export {
   getLatestPhotos,
   getImageSearch,
+  getTopicPhotos,
+  getTopics,
   getCollectionSearch,
   getCollectionPhotos,
   getUserSearch,

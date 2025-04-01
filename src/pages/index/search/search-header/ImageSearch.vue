@@ -206,7 +206,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex flex-col h-screen">
+  <div class="flex flex-col h-screen bg-[#111111]">
     <SearchHeader v-model="searchQuery" />
 
     <div class="flex-1 overflow-auto mt-[15px] scroll-container">
@@ -249,12 +249,12 @@ onMounted(() => {
     <!-- Chi tiết ảnh -->
     <div
       v-if="isDetailView && currentDetailImage"
-      class="fixed inset-0 bg-black z-50 flex flex-col text-center"
+      class="fixed inset-0 bg-[#111111] z-50 flex flex-col text-center"
       @touchstart="handleTouchStart"
       @touchmove="handleTouchMove"
       @touchend="handleTouchEnd"
     >
-      <div class="flex items-center p-4 bg-black text-white">
+      <div class="flex items-center p-4 bg-[#111111] text-white">
         <button
           class="mr-4 p-2 bg-transparent border-0 outline-none shadow-none focus:bg-transparent active:bg-transparent hover:bg-transparent"
           style="appearance: none; -webkit-appearance: none; -webkit-tap-highlight-color: transparent;"
@@ -271,7 +271,7 @@ onMounted(() => {
           {{ currentDetailImage.user.name }}
         </h1>
       </div>
-      <div class="flex-1 flex items-center justify-center overflow-hidden bg-black">
+      <div class="flex-1 flex items-center justify-center overflow-hidden bg-[#111111]">
         <img
           :src="currentDetailImage.urls.regular || currentDetailImage.urls.small"
           :alt="currentDetailImage.alt_description"

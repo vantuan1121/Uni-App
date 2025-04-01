@@ -15,6 +15,14 @@ const errorMessage = ref('')
 const scrollPosition = ref(0)
 const headerOpacity = ref(0)
 
+// Sử dụng giá trị cố định cho vị trí cuộn tối đa
+const maxScrollHeight = ref(220) //
+
+// Định nghĩa các biến ref trước để tránh lỗi "sử dụng trước khi khai báo"
+const headerRef = ref(null)
+const profileInfoRef = ref(null)
+const containerRef = ref(null)
+
 onLoad(async (options) => {
   if (options?.username) {
     username.value = options.username
@@ -44,23 +52,19 @@ async function fetchUserDetail() {
 function goBack() {
   try {
     uni.setStorageSync('scrollPosition', scrollPosition.value)
-    console.log('Đã lưu vị trí scroll vào storage:', scrollPosition.value)
+    console.log('Đã lưu vị trí cuộn vào bộ nhớ:', scrollPosition.value)
   }
   catch (e) {
-    console.error('Lỗi khi lưu vị trí scroll:', e)
+    console.error('Lỗi khi lưu vị trí cuộn:', e)
   }
   uni.navigateBack({
     delta: 1,
     fail: (err) => {
-      console.error('Lỗi khi navigateBack:', err)
+      console.error('Lỗi khi quay lại trang trước:', err)
       uni.switchTab({ url: '/pages/index/index' })
     },
   })
 }
-
-const tabBarRef = ref(null)
-const headerRef = ref(null)
-const profileInfoRef = ref(null)
 
 const displayName = computed(() => {
   if (!user.value)
@@ -69,11 +73,22 @@ const displayName = computed(() => {
 })
 
 function handleScroll() {
-  if (!headerRef.value || !profileInfoRef.value)
+  if (!headerRef.value)
     return
 
   const scrollDistance = window.scrollY
-  headerOpacity.value = Math.min(scrollDistance / 100, 1) // Tăng opacity trong 100px đầu
+
+  // Giới hạn vị trí cuộn đến mức tối đa
+  if (scrollDistance > maxScrollHeight.value) {
+    // Đặt vị trí cuộn về mức tối đa
+    window.scrollTo(0, maxScrollHeight.value)
+    scrollPosition.value = maxScrollHeight.value
+    headerOpacity.value = 1 // Đảm bảo header hiển thị hoàn toàn
+    return
+  }
+
+  // Tính toán độ mờ của header
+  headerOpacity.value = Math.min(scrollDistance / 100, 1) // Tăng độ mờ trong 100px đầu tiên
   scrollPosition.value = scrollDistance
 }
 
@@ -87,9 +102,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="">
+  <div ref="containerRef" class="">
     <div class="content-wrapper">
-      <div class="flex flex-col h-[260px] bg-[#222222] text-white">
+      <div class="flex flex-col h-[275px] bg-[#222222] text-white">
         <!-- Nút quay lại và tên tác giả -->
         <div
           ref="headerRef"
@@ -162,8 +177,10 @@ onUnmounted(() => {
         </div>
       </div>
 
-      <div ref="tabBarRef">
-        <TabBarUser :username="username" />
+      <div class="-mt[20px]">
+        <div class="tab-bar-container">
+          <TabBarUser :username="username" />
+        </div>
       </div>
     </div>
   </div>
@@ -177,5 +194,9 @@ onUnmounted(() => {
 
 .fixed-button {
   transition: all 0.2s ease;
+}
+
+.tab-bar-container {
+  z-index: 1;
 }
 </style>

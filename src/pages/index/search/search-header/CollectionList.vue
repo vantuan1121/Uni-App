@@ -278,12 +278,12 @@ onMounted(() => {
       <!-- Chế độ xem chi tiết ảnh -->
       <div
         v-if="isPhotoDetailMode && selectedCollection"
-        class="fixed inset-0 bg-black z-50 flex flex-col"
+        class="fixed inset-0 bg-[#111111] z-50 flex flex-col"
         @touchstart="handleTouchStart"
         @touchend="handleTouchEnd"
       >
         <!-- Header cho chế độ xem chi tiết ảnh -->
-        <div class="bg-black -ml-[10px] text-white p-4 flex items-center">
+        <div class="bg-[#111111] -ml-[10px] text-white p-4 flex items-center">
           <button class="flex items-center !bg-transparent !shadow-none !outline-none" @click="backToPhotosList">
             <svg width="27" height="27" viewBox="0 0 32 32" fill="white">
               <path d="M21.781 7.844l-9.063 8.594 9.063 8.594q0.25 0.25 0.25 0.609t-0.25 0.578q-0.25 0.25-0.578 0.25t-0.578-0.25l-9.625-9.125q-0.156-0.125-0.203-0.297t-0.047-0.359q0-0.156 0.047-0.328t0.203-0.297l9.625-9.125q0.25-0.25 0.578-0.25t0.578 0.25q0.25 0.219 0.25 0.578t-0.25 0.578z" fill="white"></path>
@@ -299,7 +299,7 @@ onMounted(() => {
         </div>
 
         <!-- Hiển thị ảnh chi tiết -->
-        <div class="flex-1 flex items-center justify-center bg-black">
+        <div class="flex-1 flex items-center justify-center bg-[#111111]">
           <img
             v-if="collectionPhotos[selectedPhotoIndex]"
             :src="collectionPhotos[selectedPhotoIndex].urls?.regular"
@@ -312,19 +312,23 @@ onMounted(() => {
       <!-- Hiển thị chi tiết bộ sưu tập khi đã chọn - chế độ toàn màn hình -->
       <div v-else-if="selectedCollection" class="relative">
         <!-- Header cố định nhỏ gọn -->
-        <div class="fixed top-0 left-0 right-0 z-10 bg-white">
+        <div class="fixed top-0 left-0 right-0 z-10 bg-[#111111]">
           <div class="flex items-center p-2">
-            <button class="flex items-center text-black !bg-transparent !shadow-none !outline-none" @click="backToCollections">
+            <button class="flex items-center text-white !bg-transparent !shadow-none !outline-none" @click="backToCollections">
               <svg width="27" height="27" viewBox="0 0 32 32">
-                <path d="M21.781 7.844l-9.063 8.594 9.063 8.594q0.25 0.25 0.25 0.609t-0.25 0.578q-0.25 0.25-0.578 0.25t-0.578-0.25l-9.625-9.125q-0.156-0.125-0.203-0.297t-0.047-0.359q0-0.156 0.047-0.328t0.203-0.297l9.625-9.125q0.25-0.25 0.578-0.25t0.578 0.25q0.25 0.219 0.25 0.578t-0.25 0.578z" fill="#000000"></path>
+                <path
+                  d="M21.781 7.844l-9.063 8.594 9.063 8.594q0.25 0.25 0.25 0.609t-0.25 0.578q-0.25 0.25-0.578 0.25t-0.578-0.25l-9.625-9.125q-0.156-0.125-0.203-0.297t-0.047-0.359q0-0.156 0.047-0.328t0.203-0.297l9.625-9.125q0.25-0.25 0.578-0.25t0.578 0.25q0.25 0.219 0.25 0.578t-0.25 0.578z"
+                  fill="white"
+                >
+                </path>
               </svg>
             </button>
 
             <div class="-ml-[35px] flex-1 text-center">
-              <div v-if="selectedCollection" class="font-bold truncate">
+              <div v-if="selectedCollection" class="font-bold truncate text-white">
                 {{ selectedCollection.title }}
               </div>
-              <div v-if="selectedCollection" class="text-gray-500 text-xs truncate">
+              <div v-if="selectedCollection" class="text-white text-xs truncate">
                 Created by {{ selectedCollection.user?.name || 'Ẩn danh' }}
               </div>
               <div v-else class="font-bold">
@@ -346,7 +350,7 @@ onMounted(() => {
           Không có ảnh nào trong bộ sưu tập này.
         </div>
 
-        <div v-else class="flex flex-col">
+        <div v-else class="flex flex-col bg-[#111111]">
           <div
             v-for="(photo, index) in collectionPhotos"
             :key="photo.id"
@@ -377,14 +381,14 @@ onMounted(() => {
           {{ errorMessage }}
         </div>
         <div v-else-if="collections.length === 0" class="text-center">
-          Không tìm thấy bộ sưu tập nào.
+          No collections found.
         </div>
 
-        <div v-else class="space-y-4 p-4">
+        <div v-else class="space-y-4 p-4 ">
           <div
             v-for="collection in collections"
             :key="collection.id"
-            class="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
+            class="bg-[#222222] rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
             @click="viewCollection(collection)"
           >
             <!-- Phần ảnh preview của bộ sưu tập -->
@@ -399,10 +403,10 @@ onMounted(() => {
 
             <!-- Thông tin bộ sưu tập -->
             <div class="p-2">
-              <h3 class="font-bold text-lg">
+              <h3 class="font-bold text-lg text-white">
                 {{ collection.title }}
               </h3>
-              <p class="text-gray-600 text-sm">
+              <p class="text-white text-sm">
                 {{ collection.total_photos || 0 }} photos · Curated by {{ collection.user?.name || 'Ẩn danh' }}
               </p>
             </div>
@@ -421,6 +425,9 @@ onMounted(() => {
   right: 0;
   bottom: 0;
   z-index: 9999;
-  background-color: white;
+}
+
+svg {
+  fill: white;
 }
 </style>
