@@ -22,7 +22,6 @@ const isDetailView = ref(false)
 const currentImageIndex = ref(0)
 const scrollPosition = ref(0)
 const allFlattenedImages = computed(() => {
-  // Tạo mảng 1 chiều từ tất cả ảnh trong các cột
   const flattenedImages = []
   columns.value.forEach((column) => {
     column.forEach((image) => {
@@ -57,6 +56,15 @@ function distributeImagesToColumns(newImages) {
 function calculateEstimatedHeight(image, targetWidth = 500) {
   const aspectRatio = image.height / image.width
   return Math.round(targetWidth * aspectRatio)
+}
+
+// Hàm debounce để giới hạn tần suất gọi hàm
+function debounce(func, wait) {
+  let timeout
+  return function (...args) {
+    clearTimeout(timeout)
+    timeout = setTimeout(() => func.apply(this, args), wait)
+  }
 }
 
 // Gọi API tìm kiếm ảnh
@@ -107,23 +115,27 @@ watch(() => props.query, (newQuery) => {
   fetchImages()
 }, { immediate: true })
 
-// Hàm xử lý sự kiện cuộn trang
+// Hàm xử lý sự kiện cuộn trang với debounce
+const debouncedFetchImages = debounce(() => {
+  if (!isLoading.value && hasMore.value) {
+    fetchImages(true)
+  }
+}, 200)
+
 function onScroll(event) {
   if (isDetailView.value)
     return
 
   const { scrollTop, scrollHeight, clientHeight } = event.target
-  // Lưu vị trí cuộn hiện tại
   scrollPosition.value = scrollTop
 
-  if (scrollTop + clientHeight >= scrollHeight - 200 && !isLoading.value && hasMore.value) {
-    fetchImages(true)
+  if (scrollTop + clientHeight >= scrollHeight - 200) {
+    debouncedFetchImages()
   }
 }
 
 // Chức năng xem chi tiết ảnh
 function openImageDetail(image, columnIndex, imageIndex) {
-  // Tìm index của ảnh trong mảng phẳng
   let flatIndex = 0
   let found = false
 
@@ -148,7 +160,6 @@ function openImageDetail(image, columnIndex, imageIndex) {
 
 function closeImageDetail() {
   isDetailView.value = false
-  // Phục hồi vị trí cuộn sau khi đóng chi tiết
   setTimeout(() => {
     const scrollContainer = document.querySelector('.scroll-container')
     if (scrollContainer) {
@@ -189,15 +200,12 @@ function handleTouchMove(event) {
 function handleTouchEnd() {
   if (isSwiping) {
     if (touchStartX - touchEndX > 50) {
-      // Vuốt sang trái -> ảnh tiếp theo
       nextImage()
     }
     else if (touchEndX - touchStartX > 50) {
-      // Vuốt sang phải -> ảnh trước đó
       prevImage()
     }
   }
-  // Reset các giá trị
   touchStartX = 0
   touchEndX = 0
   isSwiping = false

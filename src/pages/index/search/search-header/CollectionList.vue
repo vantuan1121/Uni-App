@@ -264,7 +264,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="flex flex-col h-screen"
+    class="flex flex-col h-screen bg-[#111111]"
     :class="{ 'fullscreen-mode': isFullscreenMode }"
   >
     <!-- Header và SearchHeader chỉ hiển thị khi không ở chế độ toàn màn hình -->

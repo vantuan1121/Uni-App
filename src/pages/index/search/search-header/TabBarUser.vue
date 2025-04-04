@@ -78,9 +78,9 @@ function shouldShowSeparator(tabIndex) {
 </script>
 
 <template>
-  <div class="flex flex-col h-screen">
+  <div class="flex flex-col h-screen bg-[#111111]">
     <!-- TabBar cố định trên cùng với khoảng cách 20px mỗi bên -->
-    <div class="mt left-0 w-full bg-black px-5">
+    <div class=" left-0 w-full bg-black px-5">
       <div class="flex justify-center items-center py-2">
         <div
           ref="tabBarRef"

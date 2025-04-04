@@ -1,6 +1,6 @@
 import { un } from '@uni-helper/uni-network'
 
-const UNSPLASH_ACCESS_KEY = 'OfbyoBm6be11iZAYwFja9VwvKoVFiPZs6ailkwXdrew'
+const UNSPLASH_ACCESS_KEY = '6uB1nyR-MMfETsIdxhAJz5O2K7UgKTB3WLUsXMCHOMs'
 
 const BASE_URL = 'https://api.unsplash.com'
 
