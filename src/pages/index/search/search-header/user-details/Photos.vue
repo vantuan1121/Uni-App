@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import { getUserPhotos } from '@/api/unsplash/unsplashAPI'
+import PhotoActions from '@/components/PhotoActions.vue'
 
 defineProps({
   searchQuery: String,
@@ -77,9 +78,25 @@ function preloadImages() {
 }
 
 function openPhotoDetail(photo, index) {
-  selectedPhoto.value = photo
-  selectedPhotoIndex.value = index
-  preloadAdjacentImages(index)
+  // Bật trạng thái loading
+  loadingImage.value = true
+  // Tiền tải ảnh chi tiết với độ phân giải cao
+  const highResSrc = photo.urls?.full || photo.urls?.regular || '/default-image.png'
+  const img = new Image()
+  img.src = highResSrc
+  img.onload = () => {
+    selectedPhoto.value = photo
+    selectedPhotoIndex.value = index
+    loadingImage.value = false
+    preloadAdjacentImages(index)
+  }
+  img.onerror = () => {
+    console.error('Lỗi tải ảnh chi tiết.')
+    selectedPhoto.value = photo
+    selectedPhotoIndex.value = index
+    loadingImage.value = false
+    preloadAdjacentImages(index)
+  }
 }
 
 function closePhotoDetail() {
@@ -96,7 +113,7 @@ function preloadAdjacentImages(index) {
     const prevPhoto = photos.value[prevIndex]
     if (!preloadedImages.value.has(prevPhoto.id)) {
       const img = new Image()
-      img.src = prevPhoto.urls?.small || prevPhoto.urls?.regular || prevPhoto.urls?.full || '/default-image.png'
+      img.src = prevPhoto.urls?.full || prevPhoto.urls?.regular || prevPhoto.urls?.small || '/default-image.png'
       preloadedImages.value.add(prevPhoto.id)
     }
   }
@@ -105,7 +122,7 @@ function preloadAdjacentImages(index) {
     const nextPhoto = photos.value[nextIndex]
     if (!preloadedImages.value.has(nextPhoto.id)) {
       const img = new Image()
-      img.src = nextPhoto.urls?.small || nextPhoto.urls?.regular || nextPhoto.urls?.full || '/default-image.png'
+      img.src = nextPhoto.urls?.full || nextPhoto.urls?.regular || nextPhoto.urls?.small || '/default-image.png'
       preloadedImages.value.add(nextPhoto.id)
     }
   }
@@ -181,7 +198,7 @@ onMounted(() => {
 <template>
   <div class="flex flex-col h-full">
     <!-- Danh sách ảnh -->
-    <div class="flex-1 overflow-auto scroll-container bg-[#111111]" @scroll="onScroll">
+    <div class="flex-1 overflow-auto scroll-container bg-[#111111]">
       <div v-if="isLoading && !photos.length" class="text-center text-gray-500 py-4">
         <span class="animate-pulse"></span>
       </div>
@@ -240,11 +257,15 @@ onMounted(() => {
         </div>
         <img
           :key="selectedPhoto.id"
-          :src="selectedPhoto.urls?.regular || selectedPhoto.urls?.full || '/default-image.png'"
+          :src="selectedPhoto.urls?.full || selectedPhoto.urls?.regular || '/default-image.png'"
           :alt="selectedPhoto.alt_description || 'Ảnh từ Unsplash'"
-          class="max-w-full max-h-[80vh] object-contain transition-transform duration-300"
+          class="w-full max-h-screen object-contain transition-transform duration-300"
           @load="onImageLoad"
         />
+        <!-- Sử dụng PhotoActions component -->
+        <div class="absolute bottom-4 right-4">
+          <PhotoActions :photo="selectedPhoto" />
+        </div>
       </div>
     </div>
   </div>
@@ -281,7 +302,7 @@ onMounted(() => {
   touch-action: pan-y pinch-zoom;
 }
 
-/* Đảm bảo header căn giữa chính xác */
+/* Header style */
 .header {
   display: flex;
   align-items: center;

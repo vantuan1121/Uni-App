@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import { getCollectionPhotos, getUserCollections } from '@/api/unsplash/unsplashAPI' // Giả định có API này
+import PhotoActions from '@/components/PhotoActions.vue'
 
 defineProps({
   searchQuery: String, // Nhận từ TabBarUser, có thể không dùng
@@ -293,6 +294,10 @@ onMounted(() => {
             :alt="collectionPhotos[selectedPhotoIndex].alt_description || 'Ảnh chi tiết'"
             class="max-w-full max-h-full object-contain"
           />
+          <!-- Sử dụng PhotoActions component -->
+          <div class="absolute bottom-4 right-4">
+            <PhotoActions :photo="collectionPhotos[selectedPhotoIndex]" />
+          </div>
         </div>
       </div>
 
@@ -392,7 +397,7 @@ onMounted(() => {
                   class="w-full h-40 object-cover"
                 />
                 <!-- Nếu không có ảnh bìa, hiển thị một vùng trống -->
-                <div v-else class="w-full h-40 bg-gray-100"></div>
+                <div v-else class="w-full h-40 bg-[#333333]"></div>
               </div>
 
               <!-- Ảnh thứ hai (chỉ hiển thị nếu có) -->
@@ -404,7 +409,7 @@ onMounted(() => {
                   class="w-full h-40 object-cover"
                 />
                 <!-- Nếu không có ảnh thứ hai, hiển thị một vùng trống -->
-                <div v-else class="w-full h-40 bg-gray-100"></div>
+                <div v-else class="w-full h-40 bg-[#333333]"></div>
               </div>
 
               <!-- Ảnh thứ ba (chỉ hiển thị nếu có) -->
@@ -416,7 +421,7 @@ onMounted(() => {
                   class="w-full h-40 object-cover"
                 />
                 <!-- Nếu không có ảnh thứ ba, hiển thị một vùng trống -->
-                <div v-else class="w-full h-40 bg-gray-100"></div>
+                <div v-else class="w-full h-40 bg-[#333333]"></div>
               </div>
 
               <!-- Lớp phủ chứa thông tin bộ sưu tập -->
@@ -443,7 +448,7 @@ onMounted(() => {
 
 <style scoped>
 .scroll-container {
-  height: calc(100vh - 60px); /* Điều chỉnh dựa trên chiều cao TabBar */
+  height: calc(100vh - 60px);
 }
 
 .fullscreen-mode {

@@ -1,6 +1,6 @@
 import { un } from '@uni-helper/uni-network'
 
-const UNSPLASH_ACCESS_KEY = 'yQ6-aeStBbhtpc4WY4Dk6toVmyKQ6GcpiSqyNLLqkXM'
+const UNSPLASH_ACCESS_KEY = 'OfbyoBm6be11iZAYwFja9VwvKoVFiPZs6ailkwXdrew'
 
 const BASE_URL = 'https://api.unsplash.com'
 
@@ -147,7 +147,7 @@ async function getUserProfile(username) {
   }
   catch (error) {
     console.error('Lỗi:', error.message || error)
-    throw error
+    return []
   }
 }
 
@@ -165,7 +165,7 @@ async function getUserPhotos(username, page = 1, perPage = 30) {
   }
   catch (error) {
     console.error('Lỗi:', error.message || error)
-    throw error
+    return []
   }
 }
 
@@ -183,7 +183,7 @@ async function getUserLikes(username, page = 1, perPage = 30) {
   }
   catch (error) {
     console.error('Lỗi:', error.message || error)
-    throw error
+    return []
   }
 }
 
@@ -201,7 +201,7 @@ async function getUserCollections(username, page = 1, perPage = 30) {
   }
   catch (error) {
     console.error('Lỗi:', error.message || error)
-    throw error
+    return []
   }
 }
 

@@ -2,6 +2,7 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import SearchHeader from './SearchHeader.vue'
 import { getImageSearch } from '@/api/unsplash/unsplashAPI'
+import PhotoActions from '@/components/PhotoActions.vue'
 
 const props = defineProps({
   query: String, // Nhận từ khóa từ TabBar.vue
@@ -171,29 +172,35 @@ function prevImage() {
 // Xử lý vuốt trái phải
 let touchStartX = 0
 let touchEndX = 0
+let isSwiping = false
 
 function handleTouchStart(event) {
   touchStartX = event.touches[0].clientX
+  isSwiping = false
 }
 
 function handleTouchMove(event) {
   touchEndX = event.touches[0].clientX
+  if (Math.abs(touchEndX - touchStartX) > 10) {
+    isSwiping = true
+  }
 }
 
 function handleTouchEnd() {
-  if (touchStartX - touchEndX > 50) {
-    // Vuốt sang trái -> ảnh tiếp theo
-    nextImage()
+  if (isSwiping) {
+    if (touchStartX - touchEndX > 50) {
+      // Vuốt sang trái -> ảnh tiếp theo
+      nextImage()
+    }
+    else if (touchEndX - touchStartX > 50) {
+      // Vuốt sang phải -> ảnh trước đó
+      prevImage()
+    }
   }
-
-  if (touchEndX - touchStartX > 50) {
-    // Vuốt sang phải -> ảnh trước đó
-    prevImage()
-  }
-
-  // Reset giá trị
+  // Reset các giá trị
   touchStartX = 0
   touchEndX = 0
+  isSwiping = false
 }
 
 // Gắn sự kiện cuộn khi component được mount
@@ -211,7 +218,7 @@ onMounted(() => {
 
     <div class="flex-1 overflow-auto mt-[15px] scroll-container">
       <div v-if="isLoading && !images.length" class="text-center text-gray-500">
-        <span class="animate-pulse">Đang tải...</span>
+        <span class="animate-pulse"></span>
       </div>
       <div v-else-if="errorMessage" class="text-center text-red-500">
         {{ errorMessage }}
@@ -277,6 +284,10 @@ onMounted(() => {
           :alt="currentDetailImage.alt_description"
           class="w-full h-auto object-cover"
         />
+        <!-- Sử dụng PhotoActions component -->
+        <div class="absolute bottom-4 right-4">
+          <PhotoActions :photo="currentDetailImage" />
+        </div>
       </div>
     </div>
   </div>

@@ -3,6 +3,7 @@ import { onMounted, ref, watch } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import SearchHeader from './SearchHeader.vue'
 import { getCollectionPhotos, getCollectionSearch } from '@/api/unsplash/unsplashAPI'
+import PhotoActions from '@/components/PhotoActions.vue'
 
 const searchQuery = ref('')
 const collections = ref([])
@@ -306,6 +307,10 @@ onMounted(() => {
             :alt="collectionPhotos[selectedPhotoIndex].alt_description || 'Ảnh chi tiết'"
             class="max-w-full max-h-full object-contain"
           />
+          <!-- Sử dụng PhotoActions component -->
+          <div class="absolute bottom-4 right-4">
+            <PhotoActions :photo="collectionPhotos[selectedPhotoIndex]" />
+          </div>
         </div>
       </div>
 
@@ -343,11 +348,11 @@ onMounted(() => {
 
         <!-- Hiển thị ảnh trong bộ sưu tập theo hàng dọc -->
         <div v-if="isLoadingPhotos && !collectionPhotos.length" class="text-center text-gray-500">
-          <span class="animate-pulse">Đang tải ảnh...</span>
+          <span class="animate-pulse"></span>
         </div>
 
-        <div v-else-if="collectionPhotos.length === 0" class="text-center">
-          Không có ảnh nào trong bộ sưu tập này.
+        <div v-else-if="collectionPhotos.length === 0" class="text-center py-4 text-white">
+          No photos
         </div>
 
         <div v-else class="flex flex-col bg-[#111111]">

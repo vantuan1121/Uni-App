@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue'
 import { onLoad } from '@dcloudio/uni-app'
 import { getUserLikes } from '@/api/unsplash/unsplashAPI'
+import PhotoActions from '@/components/PhotoActions.vue'
 
 defineProps({
   searchQuery: String,
@@ -248,6 +249,10 @@ onMounted(() => {
           class="max-w-full max-h-[80vh] object-contain transition-transform duration-300"
           @load="onImageLoad"
         />
+        <!-- Sử dụng PhotoActions component -->
+        <div class="absolute bottom-4 right-4">
+          <PhotoActions :photo="selectedPhoto" />
+        </div>
       </div>
     </div>
   </div>

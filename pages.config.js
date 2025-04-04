@@ -171,14 +171,14 @@ export default defineUniPages({
   tabBar: {
     color: '#999999',
     selectedColor: '#018d71',
-    backgroundColor: '#F8F8F8',
+    backgroundColor: '##151515',
     list: [
     ],
   },
   globalStyle: {
     navigationBarTextStyle: 'black',
     navigationBarBackgroundColor: '#ffffff',
-    backgroundColor: '#f8f8f8',
+    backgroundColor: '##151515',
   },
   // condition: {
   //   current: 0,
