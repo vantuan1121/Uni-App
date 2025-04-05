@@ -51,8 +51,17 @@ function clearSearch() {
   })
 }
 
+// function handleCancel() {
+//   uni.reLaunch({ url: '/' })
+// }
+
 function handleCancel() {
-  uni.reLaunch({ url: '/' })
+  uni.reLaunch({
+    url: '/',
+    success() {
+      location.reload(true)
+    },
+  })
 }
 
 function handleSearch(event) {
@@ -106,7 +115,7 @@ function handleClickOutside(event) {
       </span>
     </div>
 
-    <!-- Component SearchSuggestions -->
+    <!-- Gợi ý tìm kiếm thành phần -->
     <SearchSuggestions
       v-if="isSearching"
       :search-history="searchHistory"

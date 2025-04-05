@@ -91,7 +91,11 @@ function setupInfiniteScroll() {
 }
 
 // Xử lý điều hướng
-const handleCancel = () => uni.reLaunch({ url: '/' })
+function handleCancel() {
+  uni.reLaunch({ url: '/' })
+  // Tùy chọn: Xóa vị trí cuộn đã lưu nếu bạn không muốn giữ nó sau khi quay lại
+  // uni.removeStorageSync('menuScrollPosition')
+}
 
 function handleImageClick(image) {
   scrollPosition.value = window.scrollY
@@ -112,41 +116,37 @@ function backToGallery() {
 // Xử lý cảm ứng để điều hướng ảnh
 let touchStartX = 0
 let touchEndX = 0
-let isSwiping = false // Biến để xác định có đang vuốt hay không
+let isSwiping = false
 
 function handleTouchStart(event) {
   touchStartX = event.touches[0].clientX
-  touchEndX = touchStartX // Khởi tạo touchEndX bằng touchStartX
-  isSwiping = false // Reset trạng thái vuốt
+  touchEndX = touchStartX
+  isSwiping = false
 }
 
 function handleTouchMove(event) {
   touchEndX = event.touches[0].clientX
   const swipeDistance = Math.abs(touchEndX - touchStartX)
-  const threshold = 10 // Ngưỡng nhỏ để xác định bắt đầu vuốt
+  const threshold = 10
   if (swipeDistance > threshold) {
-    isSwiping = true // Xác nhận đang vuốt khi di chuyển đủ xa
+    isSwiping = true
   }
 }
 
 function handleTouchEnd() {
   const swipeDistance = touchEndX - touchStartX
-  const swipeThreshold = 75 // Ngưỡng để xác định vuốt hợp lệ
+  const swipeThreshold = 75
 
-  // Chỉ xử lý nếu thực sự là vuốt (isSwiping = true)
   if (isSwiping) {
-    // Vuốt sang phải (chuyển đến ảnh trước đó)
     if (swipeDistance > swipeThreshold && selectedImageIndex.value > 0) {
       selectedImageIndex.value--
       selectedImage.value = allImages.value[selectedImageIndex.value]
     }
-    // Vuốt sang trái (chuyển đến ảnh tiếp theo)
     else if (swipeDistance < -swipeThreshold && selectedImageIndex.value < allImages.value.length - 1) {
       selectedImageIndex.value++
       selectedImage.value = allImages.value[selectedImageIndex.value]
     }
   }
-  // Nếu không phải vuốt (chỉ nhấn), không làm gì cả
 }
 
 // Khởi tạo component
@@ -194,7 +194,6 @@ onMounted(() => {
         :alt="selectedImage.alt_description"
         class="max-w-full max-h-full object-contain"
       />
-      <!-- Sử dụng PhotoActions component -->
       <div class="absolute bottom-4 right-4">
         <PhotoActions :photo="selectedImage" />
       </div>
