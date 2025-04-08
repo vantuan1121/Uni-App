@@ -11,7 +11,7 @@ const emit = defineEmits(['update:modelValue'])
 const searchQuery = ref(props.modelValue || '')
 const isSearching = ref(false)
 const searchHistory = ref([])
-const trendingSearches = ref(['calendar', 'pascoa', 'middle', 'forest', 'weapons'])
+const trendingSearches = ref(['liberty', 'wisconsin capital', 'text message', 'voting', 'vr headset'])
 
 const searchBox = ref(null)
 

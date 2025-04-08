@@ -243,7 +243,7 @@ onUnload(() => {
     <div class="flex-1 overflow-auto mt-4 scroll-container bg-[#111111]" @scroll="onScroll">
       <!-- Trạng thái đang tải ban đầu -->
       <div v-if="isLoading && !users.length" class="text-center p-4 text-white">
-        <span class="animate-pulse">Đang tải...</span>
+        <span class="animate-pulse">Loading...</span>
       </div>
 
       <!-- Trạng thái lỗi -->
@@ -253,7 +253,9 @@ onUnload(() => {
 
       <!-- Trạng thái không có dữ liệu -->
       <div v-else-if="users.length === 0" class="text-center p-4 text-white">
-        Không tìm thấy người dùng nào.
+        <div class="mt-[160px] text-white text-[20px] font-bold">
+          No results
+        </div>
       </div>
 
       <!-- Danh sách người dùng -->
